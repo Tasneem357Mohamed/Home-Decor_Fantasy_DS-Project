@@ -28,6 +28,6 @@ public:
 };
 class Admin
 {
-    string UserName;
-    string Password;
+    string Admin_UserName;
+    string Admin_Password;
 };
