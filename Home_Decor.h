@@ -5,7 +5,7 @@ using namespace std;
 class Store
 {
 private:
-    int Store_ID;
+    static int Store_ID;
     string Store_Name;
     //list of products.
 public:
@@ -14,6 +14,7 @@ public:
     void set_Store_ID(int ID);
     void set_Store_Name(string Name);
 };
+int Store::Store_ID = 1000;
 class Admin
 {
     string Admin_UserName;

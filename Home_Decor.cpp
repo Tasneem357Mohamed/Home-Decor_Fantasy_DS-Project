@@ -1,4 +1,21 @@
 #include "Home_Decor.h"
+Store::Store()
+{
+    Store_Name = "nothing";
+}
+Store::Store(int ID, std::string Name)
+{
+    this->Store_ID++;
+    this->Store_Name = Name;
+}
+void Store::set_Store_ID(int ID)
+{
+    this->Store_ID = ID;
+}
+void Store::set_Store_Name(std::string Name)
+{
+    this->Store_Name = Name;
+}
 User::User(string &username, string &password, string &email)
 {
     this->username = username;
