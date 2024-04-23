@@ -3,6 +3,7 @@
 using namespace std;
 class Store
 {
+private:
     int Store_ID;
     string Store_Name;
     //list of products.
