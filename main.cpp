@@ -1,6 +1,7 @@
 #include <iostream>
-
+#include "Home_Decor.h"
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    UserManager userManager;
+    userManager.choise();
     return 0;
 }
