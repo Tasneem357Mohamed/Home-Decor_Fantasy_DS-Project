@@ -65,6 +65,174 @@ string Store::get_Store_Name()
 {
     return Store_Name;
 }
+/**player,player manger**/
+void player::setUserName(string username) {
+    User_Name = username;
+}
+string player::getUserName() {
+    return User_Name;
+
+}
+void  player::setPass(std::string password) {
+    Password = password;
+}
+string player::getPass() {
+    return Password;
+}
+void player::set_ID() {
+    ID++;
+}
+int player::get_id() {
+    return ID;
+}
+void player::set_budget(double budget) {
+    Budget = budget;
+}
+double player::get_budget() {
+    return Budget;
+}
+player::player(string username, string password) {
+    ID++;
+    User_Name = username;
+    Password = password;
+    Budget = 0.00;
+}
+player::player() {
+    Budget = 0.0;
+}
+void player::setPoints(int point) {
+    points = point;
+}
+int player::getPoints() {
+    return points;
+}
+vector<pair<string, float>> player::getdecoration() {
+    return Decoration;
+}
+float player::SerachProduct(string name) {
+    for (int i = 0; i < Decoration.size(); i++) {
+        if (Decoration[i].first == name) {
+            return Decoration[i].second;
+        }
+    }
+    return  -1;
+}
+player::~player() {
+
+}
+PlayerManager::PlayerManager(int x) {
+    player newplayer("toka", "12345");
+    players.insert(make_pair(newplayer.getUserName(), newplayer));
+    vector<pair<string, float>> d = newplayer.getdecoration();
+    d.push_back(make_pair("bed", 300));
+    d.push_back(make_pair("chair", 500));
+}
+void PlayerManager::signUpPlayer(string& username, string& password)
+{
+    // Check if username already exists
+    if (players.find(username) != players.end()) {
+        cout << "Username already exists. Please choose a different one.\n";
+        return;
+    }
+    player newPlayer(username, password);
+
+    // Add the new user to the map
+    players.insert({ username, newPlayer });
+
+    cout << "Player signed up successfully!\n";
+}
+void PlayerManager::signInPlayer(string& username, string& password) {
+    auto it = players.find(username);
+    if (it != players.end()) {
+        if (it->second.getPass() == password) {
+            //currentUser = username;
+            cout << "User signed in successfully!\n";
+            return;
+        }
+    }
+    cout << "Invalid username or password . Please try again.\n";
+}
+void PlayerManager::signOutPlayer()
+{
+    //currentUser = "";
+    cout << "Player signed out successfully!\n";
+}
+void PlayerManager::choise() {
+    while (true) {
+        int press;
+        cout << "1. Sign Up\n";
+        cout << "2. Sign In\n";
+        cout << "3. Sign Out\n";
+        cout << "4. Exit\n";
+        cin >> press;
+        cin.ignore();
+        if (press == 1) {
+            int id;
+            string username, password;
+            cout << "Enter username: " << '\n';
+            getline(cin, username);
+            cout << "Enter password: " << '\n';
+            getline(cin, password);
+            cout << "Enter Id: " << "\n";
+            signUpPlayer(username, password);
+        }
+        else if (press == 2) {
+            string username, password;
+            cout << "Enter username: " << '\n';
+            getline(cin, username);
+            cout << "Enter password: " << '\n';
+            getline(cin, password);
+            signInPlayer(username, password);
+        }
+        else if (press == 3) {
+            signOutPlayer();
+        }
+        else if (press == 4) {
+            break;
+        }
+        else {
+            cout << "Invalid choice. Please try again.\n";
+        }
+
+    }
+}
+void PlayerManager::choiseoperation() {
+    while (true) {
+        int press;
+        cout << "1. Sell product\n";
+        cout << "2. Buy product\n";
+        cout << "3. Replace product\n";
+        cout << "4. Exit\n";
+        cin >> press;
+        cin.ignore();
+        if (press == 1) {
+            cout << "Enter Name of Product: \n";
+            string product;
+            cin >> product;
+            //Sellproduct(product);
+        }
+        else if (press == 2) {
+            cout << "Enter Name of Product: \n";
+            string product;
+            cin >> product;
+            // Buyproduct(product);
+        }
+        else if (press == 3) {
+            cout << "Enter Name of Product: \n";
+            string product;
+            cin >> product;
+            // Replaceproduct(product);
+        }
+        else if (press == 4)
+            break;
+        else {
+            cout << "Invalid choise please try again\n";
+        }
+    }
+}
+PlayerManager::~PlayerManager() {
+}
+
 
 /** Class Admin **/
 Admin::Admin()
