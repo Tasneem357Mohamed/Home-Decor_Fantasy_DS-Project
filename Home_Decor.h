@@ -34,6 +34,48 @@ public:
     void set_Store_Name(string Name);
     string get_Store_Name();
 };
+ class player {
+    private:
+        int ID = 100;
+        int points;
+        string User_Name;
+        string Password;
+        double Budget;
+        vector<pair<string, float>>Decoration;
+    public:
+        void setUserName(string username);
+        string getUserName();
+        void setPass(string password);
+        string getPass();
+        void set_ID();
+        int get_id();
+        void setPoints(int point);
+        int getPoints();
+        void set_budget(double budget);
+        double get_budget();
+        vector<pair<string, float>>getdecoration();
+        player(string username, string password);
+        player();
+        float SerachProduct(string name);
+        ~player();
+
+
+    };
+    class PlayerManager {
+    public:
+        PlayerManager(int);
+        ~PlayerManager();
+        map<string, player>players;
+        set<int>id;
+        void signUpPlayer(string& username, string& password);
+        void signInPlayer(string& username, string& password);
+        void signOutPlayer();
+        void choise();
+        void choiseoperation();
+        /*float Sellproduct(string s);
+        float Buyproduct(string s);
+        float Replaceproduct(string s);*/
+    };
 class Admin
 {
 private:
