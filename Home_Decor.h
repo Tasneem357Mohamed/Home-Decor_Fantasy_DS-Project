@@ -90,6 +90,8 @@ public:
     Store iterate_on_Stores_Data(vector<Store> stores , string store_name);
     void Display_Top_Rated_Products(vector<Store> stores , string store_name);
     void Change_Price_Of_Product(vector<Store> stores);
+  map<int, int> calculate_points();
+        void display_top();
 };
 class User {
 private:
