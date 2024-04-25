@@ -1,9 +1,50 @@
 #include "Home_Decor.h"
+
+/** Class Product **/
+Product::Product()
+{
+    this->Price = 0;
+    this->Points = 0;
+    this->Product_Name = " ";
+}
+Product::Product(double Price, string Product_Name)
+{
+    this->Price = Price;
+    this->Product_Name = Product_Name;
+    this->Points = 0;
+}
+void Product::set_Price(double Price)
+{
+    this->Price = Price;
+}
+double Product::get_Price()
+{
+    return Price;
+}
+void Product::set_Product_Name(string Product_Name)
+{
+    this->Product_Name = Product_Name;
+}
+string Product::get_Product_Name()
+{
+    return Product_Name;
+}
+void Product::set_Points(double Points)
+{
+    this->Points = Points;
+}
+double Product::get_Points() const
+{
+    return Points;
+}
+
+/** Class Store **/
+int Store::Store_ID = 1000;
 Store::Store()
 {
-    Store_Name = "nothing";
+    Store_Name = " ";
 }
-Store::Store(int ID, std::string Name)
+Store::Store(string Name)
 {
     this->Store_ID++;
     this->Store_Name = Name;
@@ -12,10 +53,110 @@ void Store::set_Store_ID(int ID)
 {
     this->Store_ID = ID;
 }
-void Store::set_Store_Name(std::string Name)
+int Store::get_Store_ID()
+{
+    return Store_ID;
+}
+void Store::set_Store_Name(string Name)
 {
     this->Store_Name = Name;
 }
+string Store::get_Store_Name()
+{
+    return Store_Name;
+}
+
+/** Class Admin **/
+Admin::Admin()
+{
+    Admin_UserName = "Amir Eid";
+    Admin_Password = "123456";
+}
+string Admin::get_Admin_UserName()
+{
+    return Admin_UserName;
+}
+string Admin::get_Admin_Password()
+{
+    return Admin_Password;
+}
+Store Admin::iterate_on_Stores_Data(vector<Store> stores , string store_name)
+{
+    Store store;
+    for(auto it : stores)
+    {
+        if(it.get_Store_Name() == store_name)
+        {
+            store = it;
+        }
+    }
+    return store;
+}
+//dispaly The top 5 products in each store (the Store which player search on it).
+void Admin::Display_Top_Rated_Products(vector<Store> stores , string store_name)
+{
+    //reach to store as object.
+    Store store = iterate_on_Stores_Data(stores , store_name);
+    int count = 1;
+    for(auto it : store.Products_List)
+    {
+        if(count > 5)
+        {
+            break;
+        }
+        cout << "Product Number: " << count << '\n';
+        cout << "Name Of Product : " << it.second.get_Product_Name() << '\n';
+        cout << "Price Of Product : " << it.second.get_Price() << '\n';
+        cout << "Points Of Product : " << it.first << '\n';
+        count++;
+    }
+}
+void Admin::Change_Price_Of_Product(vector<Store> stores)
+{
+    string ans;
+    cout << "Enter The Name Of Store Which You Want Change Product Price:  ";
+    getline(cin , ans);
+    Store store = iterate_on_Stores_Data(stores , ans);
+    for(auto it : store.Products_List)
+    {
+        if(it.first >= 0 && it.first < 1.5)
+        {
+            it.second.set_Price(0);
+        }
+        else if(it.first >= 1.5 && it.first < 2.5)
+        {
+            double price = it.second.get_Price();
+            price -= (price * (50/100.00));
+            it.second.set_Price(price);
+        }
+        else if(it.first == 2.5)
+        {
+            double price = it.second.get_Price();
+            price -= (price * (25/100.00));
+            it.second.set_Price(price);
+        }
+        else if(it.first > 2.5 && it.first < 3.5)
+        {
+            double price = it.second.get_Price();
+            price += (price * (25/100.00));
+            it.second.set_Price(price);
+        }
+        else if(it.first >= 3.5 && it.first < 4.5)
+        {
+            double price = it.second.get_Price();
+            price += (price * (50/100.00));
+            it.second.set_Price(price);
+        }
+        else if(it.first >= 4.5 && it.first <= 5)
+        {
+            double price = it.second.get_Price();
+            it.second.set_Price(price * price);
+        }
+    }
+}
+
+
+/** Class User **/
 User::User(string &username, string &password, string &email)
 {
     this->username = username;
@@ -46,11 +187,12 @@ string User::getEmail()
 {
     return email;
 }
+
+/** Class User_Manager **/
 UserManager::UserManager()
 {
     currentUser = " ";
 }
-
 void UserManager::signUpUser(string &username, string &password, string &email)
 {
     // Check if username already exists
@@ -83,7 +225,6 @@ void UserManager::signOutUser()
     currentUser = "";
     cout << "User signed out successfully!\n";
 }
-
 void UserManager::editUser()
 {
     if (currentUser.empty()) {
@@ -113,8 +254,7 @@ bool UserManager::isUserSignedIn() const
 {
     return !currentUser.empty();
 }
-
-void UserManager::choise() {
+void UserManager::choice() {
     while (true) {
         int press;
         cout << "1. Sign Up\n";

@@ -2,6 +2,6 @@
 #include "Home_Decor.h"
 int main() {
     UserManager user;
-    user.choise();
+    user.choice();
     return 0;
 }
