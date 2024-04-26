@@ -38,6 +38,7 @@ double Product::get_Points() const
     return Points;
 }
 
+
 /** Class Store **/
 int Store::Store_ID = 1000;
 Store::Store()
@@ -57,6 +58,14 @@ int Store::get_Store_ID()
 {
     return Store_ID;
 }
+void Store::set_Store_Rate(double Store_Rate)
+{
+    this->Store_Rate = Store_Rate;
+}
+double Store::get_Store_Rate()
+{
+    return Store_Rate;
+}
 void Store::set_Store_Name(string Name)
 {
     this->Store_Name = Name;
@@ -65,7 +74,9 @@ string Store::get_Store_Name()
 {
     return Store_Name;
 }
-/**player,player manger**/
+
+
+/** Class Player **/
 void player::setUserName(string username) {
     User_Name = username;
 }
@@ -120,6 +131,9 @@ float player::SerachProduct(string name) {
 player::~player() {
 
 }
+
+
+/** Class Player_Manger **/
 PlayerManager::PlayerManager(int x) {
     player newplayer("toka", "12345");
     players.insert(make_pair(newplayer.getUserName(), newplayer));
@@ -248,20 +262,20 @@ string Admin::get_Admin_Password()
 {
     return Admin_Password;
 }
-Store Admin::iterate_on_Stores_Data(vector<Store> stores , string store_name)
+Store Admin::iterate_on_Stores_Data(multimap<double , Store, greater<double>> stores , string store_name)
 {
     Store store;
     for(auto it : stores)
     {
-        if(it.get_Store_Name() == store_name)
+        if(it.second.get_Store_Name() == store_name)
         {
-            store = it;
+            store = it.second;
         }
     }
     return store;
 }
 //dispaly The top 5 products in each store (the Store which player search on it).
-void Admin::Display_Top_Rated_Products(vector<Store> stores , string store_name)
+void Admin::Display_Top_Rated_Products(multimap<double , Store, greater<double>> stores , string store_name)
 {
     //reach to store as object.
     Store store = iterate_on_Stores_Data(stores , store_name);
@@ -279,48 +293,84 @@ void Admin::Display_Top_Rated_Products(vector<Store> stores , string store_name)
         count++;
     }
 }
-void Admin::Change_Price_Of_Product(vector<Store> stores)
+void Admin::Display_Products(multimap<double , Store, greater<double>> stores , string store_name)
+{
+    //reach to store as object.
+    Store store = iterate_on_Stores_Data(stores , store_name);
+    int count = 1;
+    for(auto it : store.Products_List)
+    {
+        cout << "Product Number: " << count << '\n';
+        cout << "Name Of Product : " << it.second.get_Product_Name() << '\n';
+        cout << "Price Of Product : " << it.second.get_Price() << '\n';
+        cout << "Points Of Product : " << it.first << '\n';
+        count++;
+    }
+}
+// change to make all the stores.
+void Admin::Change_Price_Of_Product(multimap<double , Store, greater<double>> stores)
 {
     string ans;
     cout << "Enter The Name Of Store Which You Want Change Product Price:  ";
     getline(cin , ans);
+    // call rate function of user.
     Store store = iterate_on_Stores_Data(stores , ans);
     for(auto it : store.Products_List)
     {
         if(it.first >= 0 && it.first < 1.5)
         {
-            it.second.set_Price(0);
+            double price = it.second.get_Price();
+            price -= (price * (35/100.00));
+            it.second.set_Price(price);
         }
         else if(it.first >= 1.5 && it.first < 2.5)
         {
             double price = it.second.get_Price();
-            price -= (price * (50/100.00));
-            it.second.set_Price(price);
-        }
-        else if(it.first == 2.5)
-        {
-            double price = it.second.get_Price();
-            price -= (price * (25/100.00));
+            price -= (price * (15/100.00));
             it.second.set_Price(price);
         }
         else if(it.first > 2.5 && it.first < 3.5)
         {
             double price = it.second.get_Price();
-            price += (price * (25/100.00));
+            price += (price * (15/100.00));
             it.second.set_Price(price);
         }
-        else if(it.first >= 3.5 && it.first < 4.5)
+        else if(it.first >= 3.5 && it.first < 5)
         {
             double price = it.second.get_Price();
-            price += (price * (50/100.00));
+            price += (price * (35/100.00));
             it.second.set_Price(price);
-        }
-        else if(it.first >= 4.5 && it.first <= 5)
-        {
-            double price = it.second.get_Price();
-            it.second.set_Price(price * price);
         }
     }
+}
+multimap<double, Product, greater<double>>Admin::iterate_on_products_Data(vector<pair<string,float>>Decoration , multimap<double, Product, greater<double>>products) {
+    multimap<double, Product, greater<double>>objects;
+    for(auto it : Decoration) {
+        for(auto Ir : products)
+        {
+            if (Ir.second.get_Product_Name() == it.first)
+            {
+                objects.insert(make_pair(Ir.first, Ir.second));
+                break;
+            }
+        }
+    }
+    return objects;
+}
+vector<pair<float, player>>Admin::calculate_points(vector<pair<string, float>>Decoration , multimap<double, Product, greater<double>>products ,vector<player>players) {
+    vector<pair<float, player>> mymap;
+    for(auto itr = players.begin(); itr != players.end(); itr++) {
+        float sum = 0;
+        multimap<double, Product, greater<double>>result = iterate_on_products_Data(itr->getdecoration(), products);
+        multimap<double, Product, greater<double>>::iterator it;
+        for (it = result.begin(); it != result.end(); it++) {
+            sum += it->first;
+        }
+        pair<float , player> player;
+        player = make_pair(sum , *itr);
+        mymap.push_back(player);
+    }
+    return mymap;
 }
 
 
@@ -355,6 +405,7 @@ string User::getEmail()
 {
     return email;
 }
+
 
 /** Class User_Manager **/
 UserManager::UserManager()
