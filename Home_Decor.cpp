@@ -274,6 +274,24 @@ Store Admin::iterate_on_Stores_Data(multimap<double , Store, greater<double>> st
     }
     return store;
 }
+map<int, int>Admin::calculate_points() {
+    map<int,int>mymap;
+
+    return mymap;
+
+}
+void Admin::display_top() {
+    map<int, int>result = calculate_points();
+    map<int, int>::iterator it;
+    auto maxIterator = result.begin();
+    for (it = next(result.begin()); it != result.end(); it++) {
+        if (it->second > maxIterator->second)
+            maxIterator=it;
+    }
+    cout << "The Winner Is Player" << maxIterator->first << endl;
+    cout << "congratulation......";
+
+}
 //dispaly The top 5 products in each store (the Store which player search on it).
 void Admin::Display_Top_Rated_Products(multimap<double , Store, greater<double>> stores , string store_name)
 {
