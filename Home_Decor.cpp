@@ -4,14 +4,12 @@
 Product::Product()
 {
     this->Price = 0;
-    this->Points = 0;
     this->Product_Name = " ";
 }
 Product::Product(double Price, string Product_Name)
 {
     this->Price = Price;
     this->Product_Name = Product_Name;
-    this->Points = 0;
 }
 void Product::set_Price(double Price)
 {
@@ -29,14 +27,6 @@ string Product::get_Product_Name()
 {
     return Product_Name;
 }
-void Product::set_Points(double Points)
-{
-    this->Points = Points;
-}
-double Product::get_Points() const
-{
-    return Points;
-}
 
 
 /** Class Store **/
@@ -44,11 +34,13 @@ int Store::Store_ID = 1000;
 Store::Store()
 {
     Store_Name = " ";
+    Store_Rate = 0;
 }
 Store::Store(string Name)
 {
     this->Store_ID++;
     this->Store_Name = Name;
+    this->Store_Rate = 0;
 }
 void Store::set_Store_ID(int ID)
 {
@@ -73,6 +65,10 @@ void Store::set_Store_Name(string Name)
 string Store::get_Store_Name()
 {
     return Store_Name;
+}
+multimap<double, Product, greater<double>> Store::get_Product_List()
+{
+    return Products_List;
 }
 
 
@@ -262,6 +258,7 @@ string Admin::get_Admin_Password()
 {
     return Admin_Password;
 }
+// should user make search function return string(Store_Name).
 Store Admin::iterate_on_Stores_Data(multimap<double , Store, greater<double>> stores , string store_name)
 {
     Store store;
@@ -275,12 +272,13 @@ Store Admin::iterate_on_Stores_Data(multimap<double , Store, greater<double>> st
     return store;
 }
 //dispaly The top 5 products in each store (the Store which player search on it).
+// should user make search function return string(Store_Name).
 void Admin::Display_Top_Rated_Products(multimap<double , Store, greater<double>> stores , string store_name)
 {
     //reach to store as object.
     Store store = iterate_on_Stores_Data(stores , store_name);
     int count = 1;
-    for(auto it : store.Products_List)
+    for(auto it : store.get_Product_List())
     {
         if(count > 5)
         {
@@ -293,12 +291,14 @@ void Admin::Display_Top_Rated_Products(multimap<double , Store, greater<double>>
         count++;
     }
 }
+// should user make search function return string(Store_Name).
 void Admin::Display_Products(multimap<double , Store, greater<double>> stores , string store_name)
 {
     //reach to store as object.
     Store store = iterate_on_Stores_Data(stores , store_name);
     int count = 1;
-    for(auto it : store.Products_List)
+
+    for(auto it : store.get_Product_List())
     {
         cout << "Product Number: " << count << '\n';
         cout << "Name Of Product : " << it.second.get_Product_Name() << '\n';
@@ -307,42 +307,89 @@ void Admin::Display_Products(multimap<double , Store, greater<double>> stores , 
         count++;
     }
 }
-// change to make all the stores.
-void Admin::Change_Price_Of_Product(multimap<double , Store, greater<double>> stores)
+// should discuss.
+void Admin::Change_Price_Of_Product(multimap<double , Store, greater<double>> stores , int Choice)
 {
-    string ans;
-    cout << "Enter The Name Of Store Which You Want Change Product Price:  ";
-    getline(cin , ans);
-    // call rate function of user.
-    Store store = iterate_on_Stores_Data(stores , ans);
-    for(auto it : store.Products_List)
+    // if Admin want Change product price for certain store
+    if(Choice == 1)
     {
-        if(it.first >= 0 && it.first < 1.5)
+        string ans;
+        cout << "Enter The Name Of Store Which You Want Change Product Price:  ";
+        getline(cin , ans);
+        // call rate function of user.
+        Store store = iterate_on_Stores_Data(stores , ans);
+        for(auto it : store.get_Product_List())
         {
-            double price = it.second.get_Price();
-            price -= (price * (35/100.00));
-            it.second.set_Price(price);
+            //discount 35%
+            if(it.first >= 0 && it.first < 1.5)
+            {
+                double price = it.second.get_Price();
+                price -= (price * (35/100.00));
+                it.second.set_Price(price);
+            }
+                //discount 15%
+            else if(it.first >= 1.5 && it.first < 2.5)
+            {
+                double price = it.second.get_Price();
+                price -= (price * (15/100.00));
+                it.second.set_Price(price);
+            }
+                //increase price 15%
+            else if(it.first > 2.5 && it.first < 3.5)
+            {
+                double price = it.second.get_Price();
+                price += (price * (15/100.00));
+                it.second.set_Price(price);
+            }
+                //increase price 35%
+            else if(it.first >= 3.5 && it.first < 5)
+            {
+                double price = it.second.get_Price();
+                price += (price * (35/100.00));
+                it.second.set_Price(price);
+            }
         }
-        else if(it.first >= 1.5 && it.first < 2.5)
+    }
+    // if Admin want Change product price for all store
+    else
+    {
+        for(auto ir : stores)
         {
-            double price = it.second.get_Price();
-            price -= (price * (15/100.00));
-            it.second.set_Price(price);
-        }
-        else if(it.first > 2.5 && it.first < 3.5)
-        {
-            double price = it.second.get_Price();
-            price += (price * (15/100.00));
-            it.second.set_Price(price);
-        }
-        else if(it.first >= 3.5 && it.first < 5)
-        {
-            double price = it.second.get_Price();
-            price += (price * (35/100.00));
-            it.second.set_Price(price);
+            for(auto it : ir.second.get_Product_List())
+            {
+                //discount 35%
+                if(it.first >= 0 && it.first < 1.5)
+                {
+                    double price = it.second.get_Price();
+                    price -= (price * (35/100.00));
+                    it.second.set_Price(price);
+                }
+                    //discount 15%
+                else if(it.first >= 1.5 && it.first < 2.5)
+                {
+                    double price = it.second.get_Price();
+                    price -= (price * (15/100.00));
+                    it.second.set_Price(price);
+                }
+                    //increase price 15%
+                else if(it.first > 2.5 && it.first < 3.5)
+                {
+                    double price = it.second.get_Price();
+                    price += (price * (15/100.00));
+                    it.second.set_Price(price);
+                }
+                    //increase price 35%
+                else if(it.first >= 3.5 && it.first < 5)
+                {
+                    double price = it.second.get_Price();
+                    price += (price * (35/100.00));
+                    it.second.set_Price(price);
+                }
+            }
         }
     }
 }
+//here should reach to product_list from stores.
 multimap<double, Product, greater<double>>Admin::iterate_on_products_Data(vector<pair<string,float>>Decoration , multimap<double, Product, greater<double>>products) {
     multimap<double, Product, greater<double>>objects;
     for(auto it : Decoration) {

@@ -11,7 +11,6 @@ class Product
 private:
     string Product_Name;
     double Price;
-    double Points;
 public:
     Product();
     Product(double Price , string Product_Name);
@@ -19,17 +18,14 @@ public:
     double get_Price();
     void set_Product_Name(string Product_Name);
     string get_Product_Name();
-    void set_Points(double Points);
-    double get_Points()const;
 };
 class Store
 {
-public:
-    std::multimap<double , Product> Products_List;
 private:
-    static int Store_ID;
     double Store_Rate;
     string Store_Name;
+    static int Store_ID;
+    multimap<double , Product , greater<double>> Products_List;
 public:
     Store();
     Store(string Name);
@@ -39,6 +35,7 @@ public:
     double get_Store_Rate();
     void set_Store_Name(string Name);
     string get_Store_Name();
+    multimap<double , Product , greater<double>> get_Product_List();
 };
 class player {
 private:
@@ -91,12 +88,10 @@ public:
     Admin();
     string get_Admin_UserName();
     string get_Admin_Password();
-//    implemented with file
-//    void Add_Product();
     Store iterate_on_Stores_Data(multimap<double , Store, greater<double>> stores, string store_name);
     void Display_Top_Rated_Products(multimap<double , Store, greater<double>> stores, string store_name);
     void Display_Products(multimap<double , Store, greater<double>> stores, string store_name);
-    void Change_Price_Of_Product(multimap<double , Store, greater<double>> stores);
+    void Change_Price_Of_Product(multimap<double , Store, greater<double>> stores , int Choice);
     multimap<double, Product, greater<double>>iterate_on_products_Data(vector<pair<string, float>>Decoration, multimap<double, Product, greater<double>>products);
     vector<pair<float, player>> calculate_points(vector<pair<string, float>>Decoration, multimap<double, Product, greater<double>>products,vector<player>players);
 };
