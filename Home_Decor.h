@@ -1,6 +1,9 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
+#include <queue>
+#include <set>
 #include <map>
 using namespace std;
 class Product
@@ -25,57 +28,60 @@ public:
     std::multimap<double , Product> Products_List;
 private:
     static int Store_ID;
+    double Store_Rate;
     string Store_Name;
 public:
     Store();
     Store(string Name);
     void set_Store_ID(int ID);
     int get_Store_ID();
+    void set_Store_Rate(double Store_Rate);
+    double get_Store_Rate();
     void set_Store_Name(string Name);
     string get_Store_Name();
 };
- class player {
-    private:
-        int ID = 100;
-        int points;
-        string User_Name;
-        string Password;
-        double Budget;
-        vector<pair<string, float>>Decoration;
-    public:
-        void setUserName(string username);
-        string getUserName();
-        void setPass(string password);
-        string getPass();
-        void set_ID();
-        int get_id();
-        void setPoints(int point);
-        int getPoints();
-        void set_budget(double budget);
-        double get_budget();
-        vector<pair<string, float>>getdecoration();
-        player(string username, string password);
-        player();
-        float SerachProduct(string name);
-        ~player();
+class player {
+private:
+    int ID = 100;
+    int points;
+    string User_Name;
+    string Password;
+    double Budget;
+    vector<pair<string, float>>Decoration;
+public:
+    void setUserName(string username);
+    string getUserName();
+    void setPass(string password);
+    string getPass();
+    void set_ID();
+    int get_id();
+    void setPoints(int point);
+    int getPoints();
+    void set_budget(double budget);
+    double get_budget();
+    vector<pair<string, float>>getdecoration();
+    player(string username, string password);
+    player();
+    float SerachProduct(string name);
+    ~player();
 
 
-    };
-    class PlayerManager {
-    public:
-        PlayerManager(int);
-        ~PlayerManager();
-        map<string, player>players;
-        set<int>id;
-        void signUpPlayer(string& username, string& password);
-        void signInPlayer(string& username, string& password);
-        void signOutPlayer();
-        void choise();
-        void choiseoperation();
-        /*float Sellproduct(string s);
-        float Buyproduct(string s);
-        float Replaceproduct(string s);*/
-    };
+};
+class PlayerManager {
+public:
+    PlayerManager(int);
+    ~PlayerManager();
+    map<string, player>players;
+    set<int>id;
+    void signUpPlayer(string& username, string& password);
+    void signInPlayer(string& username, string& password);
+    void signOutPlayer();
+    void choise();
+    void choiseoperation();
+    /*float Sellproduct(string s);
+    float Buyproduct(string s);
+    float Replaceproduct(string s);*/
+};
 class Admin
 {
 private:
@@ -87,11 +93,12 @@ public:
     string get_Admin_Password();
 //    implemented with file
 //    void Add_Product();
-    Store iterate_on_Stores_Data(vector<Store> stores , string store_name);
-    void Display_Top_Rated_Products(vector<Store> stores , string store_name);
-    void Change_Price_Of_Product(vector<Store> stores);
-  map<int, int> calculate_points();
-        void display_top();
+    Store iterate_on_Stores_Data(multimap<double , Store, greater<double>> stores, string store_name);
+    void Display_Top_Rated_Products(multimap<double , Store, greater<double>> stores, string store_name);
+    void Display_Products(multimap<double , Store, greater<double>> stores, string store_name);
+    void Change_Price_Of_Product(multimap<double , Store, greater<double>> stores);
+    multimap<double, Product, greater<double>>iterate_on_products_Data(vector<pair<string, float>>Decoration, multimap<double, Product, greater<double>>products);
+    vector<pair<float, player>> calculate_points(vector<pair<string, float>>Decoration, multimap<double, Product, greater<double>>products,vector<player>players);
 };
 class User {
 private:
@@ -108,7 +115,6 @@ public:
     string getEmail();
     void setEmail( string& newEmail);
 };
-
 class UserManager {
 private:
     map<string , User> users;
