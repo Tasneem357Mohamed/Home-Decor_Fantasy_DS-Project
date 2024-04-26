@@ -38,6 +38,6 @@ We welcome contributions to improve and enhance the Home Décor Fantasy applicat
 This project is licensed under the guidnes of Computer and information science  Ain Shams university license 
 ## Contact
 
-For any inquiries or support regarding the Home Décor Fantasy application, feel free to contact us at 2022170579@cis.asu.edu.eg
+For any inquiries or support regarding the Home Décor Fantasy application, feel free to contact us at 2022170105@cis.asu.edu.eg
 
 Happy decorating!
