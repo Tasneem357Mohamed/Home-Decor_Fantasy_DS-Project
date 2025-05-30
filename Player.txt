@@ -1,0 +1,25 @@
+player kareem 0a12B34@567 1002  69500 3 3 bed 3000 chair 4000 curtain 3500
+player AhmedHossam  Z5x6789#2017 1003  61000 8 4  chair_z 5500  curtain_f 4500 Carpet 6000 bed 3000
+player Malkahmed S_a555642788 1004  59000 2 2 Wardrobe 17000 chair 4000
+player GanaSaber u#H288811 1005  3000 13 6 bed 3000 chair_z 5500 television 30000  curtain 3500 Wardrobe_z 20000 table 15000
+player ali#omn Tajs@63343 1007  80000 4 0 
+player AymanAli  Kl$8794300 1008  26000 10 4 Wardrobe_z 20000 table 15000 sofa 15000 chair 4000
+player mohamedtamer Wr&920920546 1006  76500 7 1  curtain 3500
+player samahHassan rS@74829290 1010  53500 8 3  chair_z 5500 Carpet 6000 table 15000
+player Amr X@w637202378 1009  56500 11 4 picture 2000 conditioning 15000 curtain 3500 bed 3000
+player amiraMohamed Ami#678543 1011  8000  7 5  conditioning 15000 chair 4000  bed 3000  Wardrobe_z 20000 television 30000
+user Hassan Ho&67829065 Hassanh@gmail.com 3  0 0
+user Eid Ei$28920111 Eid21@gmail.com 1 0 0
+user SaraAhmed Sa%36100986 SaraA@gmail.com 2 0 0
+user AmiraKmal Ak@9102764589 AmiraKamal@gmail.com 5  0 0
+user MostafaSaid M@123450987s M_Said@gmail.com 4 0 0
+user Mazen M716m@0986 Mazen24@gmail.com 7 0 0
+user omnia ZXc@019874536 omnia_13@gmail.com 6 0 0
+user Yosef Yo#12345678 Yosef@gmail.com 8  0 0
+user Yassen Ya&&212345553 Yaso@gmail.com 10  0 0
+user YosrHossam Y&h#109683618 Yosr@gmail.com 9 0 0
+UsER yosrHossam Y&h#109683618 Yosr@gmail.com 9 0 0
+
+
+
+

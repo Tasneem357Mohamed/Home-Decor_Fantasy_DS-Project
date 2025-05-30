@@ -1,0 +1,8 @@
+1000 loka 5.0 3 1 bed loka 15000.0 3.5 15 8 chair loka 1500.0 2.5 20 14 desk loka 3000.0 4.0 10
+2003 cute 3.2 2 2 cerput cute 2000.0 3.0 5 9 vase cute 1000.0 3.2 5
+88768 pink 3.0 3 3 antiques pink 5000.0 4.0 12 10 tablue pink 1500.0 3.0 5 15 wellclock pink 750.0  1.5 4
+1203 winki 3.0 0 
+33404 rose 2.5 2 4 picture rose 500.0 2.5 15 11 posters rose 350.0 2.0 40
+55671 honey 1.0 2 5 mirror honey 3500.0 4.5 12 12 tray honey 5000.0 .5 10
+4454 koko 0.0 2 6 frame koko 400.0 1.5 55 13 treasury koko 70000.0 5 20
+000000 break 0.0 1 7frame koko 400.0 1.5 55

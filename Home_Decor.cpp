@@ -1,7 +1,4 @@
 #include "Home_Decor.h"
-
-
-
 /** Class Product **/
 Product::Product()
 {
@@ -11,19 +8,19 @@ Product::Product()
     this->Points = 0.0;
     this->Product_Name = " ";
 }
-Product::Product(int id,double price, string productname)
+Product::Product(int id, double price, string productname)
 {
     Product::Product_ID = id;
     this->Price = price;
     this->Product_Name = std::move(productname);
 }
-Product::Product(int id , string productname, double points)
+Product::Product(int id, string productname, double points)
 {
     Product::Product_ID = id;
     this->Product_Name = std::move(productname);
     this->Points = points;
 }
-Product::Product(int id , string productname, string storename, int productcounter, double price)
+Product::Product(int id, string productname, string storename, int productcounter, double price)
 {
     Product::Product_ID = id;
     this->Null_check = false;
@@ -33,7 +30,7 @@ Product::Product(int id , string productname, string storename, int productcount
     this->Price = price;
     this->Points = 0.0;
 }
-Product::Product(int id, string nameofproduct, string nameofstore, int productcounter, double price,double points)
+Product::Product(int id, string nameofproduct, string nameofstore, int productcounter, double price, double points)
 {
     Product::Product_ID = id;
     this->Product_Name = std::move(nameofproduct);
@@ -60,19 +57,19 @@ double Product::get_Price() const
 }
 void Product::set_Product_Name(string proname)
 {
-    this->Product_Name = proname ;
+    this->Product_Name = proname;
 }
 string Product::get_Product_Name() const
 {
     return Product_Name;
 }
-const string &Product::getStoreName() const {
+const string& Product::getStoreName() const {
     return Store_Name;
 }
 double Product::getPoints() const {
     return Points;
 }
-void Product::setStoreName(const string &storeName) {
+void Product::setStoreName(const string& storeName) {
     Store_Name = storeName;
 }
 void Product::setProductCounter(int count) {
@@ -113,14 +110,14 @@ Store::Store()
     Number_Of_Products = 0;
     Products_List = default_list;
 }
-Store::Store(int id , string Name)
+Store::Store(int id, string Name)
 {
     this->Store_ID = id;
     Null_checker = true;
     this->Store_Name = std::move(Name);
     this->Store_Rate = 0;
 }
-Store::Store(int id , string name, double rate, int numProducts)
+Store::Store(int id, string name, double rate, int numProducts)
 {
     this->Store_ID = id;
     Null_checker = true;
@@ -128,7 +125,7 @@ Store::Store(int id , string name, double rate, int numProducts)
     this->Store_Rate = rate;
     this->Number_Of_Products = numProducts;
 }
-Store::Store(int id , string name, double rate, int numProducts, priority_queue<pair<double, Product>> products)
+Store::Store(int id, string name, double rate, int numProducts, priority_queue<pair<double, Product>> products)
 {
     this->Store_ID = id;
     this->Store_Name = name;
@@ -196,6 +193,7 @@ Store::~Store()
 
 
 
+
 /** Class Player **/
 Player::Player(int idofplayer, string nameofplayer, string passwordofplayer) {
     ID = idofplayer;
@@ -249,7 +247,7 @@ vector<pair<string, double>> Player::getdecoration() const
 {
     return Decoration;
 }
-double Player::SerachProduct(string name,int &ind) {
+double Player::SerachProduct(string name, int& ind) {
     vector<pair<string, double>> list = getdecoration();
     for (int i = 0; i < list.size(); i++) {
         if (list[i].first == name)
@@ -269,8 +267,8 @@ void Player::Sellproduct(string s)
     {
         cout << "invalid product\n";
         std::this_thread::sleep_for(std::chrono::seconds(0));
-        admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
-        cout << "-----------------"<< '\n';
+        //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+        cout << "-----------------" << '\n';
     }
     else {
         Decoration.erase(Decoration.begin() + ind);
@@ -278,11 +276,11 @@ void Player::Sellproduct(string s)
     cout << "Now Your Décoration Set Contains :" << '\n';
     cout << "Product Name" << " | " << "Product Price" << '\n';
     cout << "----------------------------------------" << '\n';
-    for(auto it : Decoration) {
+    for (auto it : Decoration) {
         cout << it.first << " | " << it.second << "\n";
     }
     std::this_thread::sleep_for(std::chrono::seconds(0));
-    admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+    // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
 }
 void Player::Buyproduct(string s, double price)
 {
@@ -291,11 +289,11 @@ void Player::Buyproduct(string s, double price)
     cout << "Now Your Décoration Set Contains :" << '\n';
     cout << "Product Name" << " | " << "Product Price" << '\n';
     cout << "----------------------------------------" << '\n';
-    for(auto it : Decoration) {
+    for (auto it : Decoration) {
         cout << it.first << " | " << it.second << "\n";
     }
     std::this_thread::sleep_for(std::chrono::seconds(0));
-    admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+    // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
 }
 //take new name of product and its price.
 string Player::Replaceproduct(string s, double price)
@@ -303,13 +301,13 @@ string Player::Replaceproduct(string s, double price)
     Admin admin;
     cout << "Product Name" << " | " << "Product Price" << '\n';
     cout << "----------------------------------------" << '\n';
-    for(auto it : Decoration)
+    for (auto it : Decoration)
     {
         cout << it.first << " | " << it.second << "\n";
     }
     cout << "Enter Name of old product\n";
     string old_product;
-    getline(cin , old_product);
+    getline(cin, old_product);
     int replace_index;
     //no need for price >> price is changeable.
     float old_price = SerachProduct(old_product, replace_index);
@@ -318,11 +316,11 @@ string Player::Replaceproduct(string s, double price)
     cout << "Now Your Décoration Set Contains :" << '\n';
     cout << "Product Name" << " | " << "Product Price" << '\n';
     cout << "----------------------------------------" << '\n';
-    for(auto it : Decoration) {
+    for (auto it : Decoration) {
         cout << it.first << " | " << it.second << "\n";
     }
     std::this_thread::sleep_for(std::chrono::seconds(0));
-    admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+    // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
     return old_product;
 }
 bool Player::operator<(const Player& other) const {
@@ -336,23 +334,25 @@ Player::~Player()
 
 /** Class Player Manager**/
 PlayerManager::PlayerManager() {
-//    Player newPlayer("toka", "12345");
-//    vector<pair<string, float>> d;
-//    d.push_back(make_pair("bed", 300));
-//    d.push_back(make_pair("chair", 500));
-//    newPlayer.setdecoration(d);
-//    Players.insert(make_pair(newPlayer.getUserName(), newPlayer));
+    //    Player newPlayer("toka", "12345");
+    //    vector<pair<string, float>> d;
+    //    d.push_back(make_pair("bed", 300));
+    //    d.push_back(make_pair("chair", 500));
+    //    newPlayer.setdecoration(d);
+    //    Players.insert(make_pair(newPlayer.getUserName(), newPlayer));
 }
-int PlayerManager::signUpPlayer(int id , string username, string password , unordered_map<string, User> users , Player &player)
+int PlayerManager::signUpPlayer(int id, string username, string password, unordered_map<string, User> users, Player& player)
 {
     Admin admin;
+    cout << username << "\n";
     // Check if username already exists
-    if(Players.find(username) != Players.end()) {
+    if (Players.find(username) != Players.end()) {
+        cout << username<<"sa" << "\n";
         //if username is exist.
         return -1;
     }
     auto it = Players.begin();
-    bool f = 0 , u = 0;
+    bool f = 0, u = 0;
     while (it != Players.end())
     {
         if (it->second.getPass() == password)
@@ -362,7 +362,7 @@ int PlayerManager::signUpPlayer(int id , string username, string password , unor
         }
         else
         {
-            if(it->second.get_id() == id)
+            if (it->second.get_id() == id)
             {
                 f = 1;
                 break;
@@ -370,30 +370,30 @@ int PlayerManager::signUpPlayer(int id , string username, string password , unor
         }
         it++;
     }
-    for(auto ir : users)
+    for (auto ir : users)
     {
-        if(ir.second.getPassword() == password)
+        if (ir.second.getPassword() == password)
         {
             u = 1;
             break;
         }
     }
-    if(f || u || password == "Aaaaa$009") {
+    if (f || u || password == "Aaaaa$009") {
         //if password is exist in Players , Users or Admin.
         //if id is exist in Players.
         return -2;
     }
-    Player newPlayer(id , username, password);
+    Player newPlayer(id, username, password);
     // Add the new user to the map
     Players.insert({ username, newPlayer });
     cout << "Player signed up successfully!\n";
     std::this_thread::sleep_for(std::chrono::seconds(0));
-    admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+    // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
     cout << "-------------------------------" << '\n';
     player = newPlayer;
     return 1;
 }
-int PlayerManager::signInPlayer(string& username, string& password ,int &function , Player &player) {
+int PlayerManager::signInPlayer(string& username, string& password, int& function, Player& player) {
     auto it = Players.find(username);
     if (it != Players.end())
     {
@@ -420,18 +420,18 @@ void PlayerManager::Edit_Information_of_player(unordered_map<string, User> userl
     do
     {
         auto it = Players.find(currentPlayer.getUserName());
-        while(true)
+        while (true)
         {
             cout << "Choose what you want to update:\n";
             cout << "1-Change Username\n";
             cout << "2-Change Password\n";
             cin >> choice;
             cin.ignore();
-            if(choice == 1 || choice == 2)
+            if (choice == 1 || choice == 2)
             {
                 cout << "Valid Choice ^^" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                 cout << "-----------------------------------------------------" << '\n';
                 break;
             }
@@ -439,7 +439,7 @@ void PlayerManager::Edit_Information_of_player(unordered_map<string, User> userl
             {
                 cout << "Invalid Choice!!! / Please,Enter Choice again: ";
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                 cout << "-----------------------------------------------------" << '\n';
             }
         }
@@ -450,19 +450,22 @@ void PlayerManager::Edit_Information_of_player(unordered_map<string, User> userl
             case 1:
             {
                 string newUsername;
-                while(Players.find(newUsername) != Players.end()) //check username is exist / or not
+                cout << "Enter new username: ";
+                getline(cin, newUsername);
+                while (Players.find(newUsername) != Players.end()) //check username is exist / or not
                 {
-                    cout << "Enter new username: ";
-                    getline(cin , newUsername);
+
                     cout << "This username is already exist!!!" << '\n';
+                    cout << "Enter new username: ";
+                    getline(cin, newUsername);
                     std::this_thread::sleep_for(std::chrono::seconds(0));
-                    admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                    // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                     cout << "-----------------------------------------------------" << '\n';
                 }
                 unordered_map<string, Player>::iterator it2;
                 it2 = Players.find(currentPlayer.getUserName());
                 int id = it2->second.get_id();
-                Player newPlayer(id , newUsername ,it2->second.getPass());
+                Player newPlayer(id, newUsername, it2->second.getPass());
                 newPlayer.set_ID(it2->second.get_id());
                 // Add the Player with her/his new data to the map
                 Players.insert({ newUsername, newPlayer });
@@ -470,41 +473,41 @@ void PlayerManager::Edit_Information_of_player(unordered_map<string, User> userl
                 currentPlayer.setUserName(newUsername);
                 cout << "Username updated successfully!\n";
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                 cout << "-----------------------------------------------------" << '\n';
                 break;
             }
             case 2:
             {
-                auto ir = Players.begin();
+                auto it = Players.begin();
                 bool f = 0;
                 string newPassword;
-                while(true)
+                while (true)
                 {
                     cout << "Enter new password: ";
-                    getline(cin,newPassword);
-                    while (ir != Players.end())
+                    getline(cin, newPassword);
+                    while (it != Players.end())
                     {
-                        if(ir->second.getPass() == newPassword)
+                        if (it->second.getPass() == newPassword)
                         {
                             f = 1;
                             break;
                         }
                         it++;
                     }
-                    for(auto irr : userlist)
+                    for (auto irr : userlist)
                     {
-                        if(irr.second.getPassword() == newPassword)
+                        if (irr.second.getPassword() == newPassword)
                         {
                             f = 1;
                             break;
                         }
                     }
-                    if(f == 1 || newPassword == "Aaaaa$009")
+                    if (f == 1 || newPassword == "Aaaaa$009")
                     {
                         cout << "This password already exist!!!" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                        // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                         cout << "-----------------------------------------------------" << '\n';
                         f = 0;
                     }
@@ -512,31 +515,31 @@ void PlayerManager::Edit_Information_of_player(unordered_map<string, User> userl
                     {
                         cout << "Valid Password ^^" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                        //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                         cout << "------------------" << '\n';
                         break;
                     }
                 }
                 itt->second.setPass(newPassword);
-                cout << "Your Password is updated successfully ^^"<< '\n';
+                cout << "Your Password is updated successfully ^^" << '\n';
                 break;
             }
         }
-        while(true)
+        while (true)
         {
             cout << "Enter yes(if you want change another data) / no(if not)" << '\n';
-            getline(cin , ans);
-            transform(ans.begin(), ans.end(), ans.begin(), [](unsigned char c){ return std::tolower(c); });
-            if((ans == "yes") || (ans == "no"))
+            getline(cin, ans);
+            transform(ans.begin(), ans.end(), ans.begin(), [](unsigned char c) { return std::tolower(c); });
+            if ((ans == "yes") || (ans == "no"))
             {
                 break;
             }
             cout << "Invalid Answer!!!" << '\n';
             std::this_thread::sleep_for(std::chrono::seconds(0));
-            admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+            //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
             cout << "------------------" << '\n';
         }
-    }while(ans != "no");
+    } while (ans != "no");
 }
 void PlayerManager::signOutPlayer()
 {
@@ -544,110 +547,69 @@ void PlayerManager::signOutPlayer()
     //currentUser = "";
     cout << "Player signed out successfully!\n";
     std::this_thread::sleep_for(std::chrono::seconds(0));
-    admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+    // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
     cout << "------------------------------" << '\n';
 }
 void PlayerManager::readFromFile()
 {
-    ifstream playerfile , setfile;
-    playerfile.open("/Users/admin/Desktop/Home_Decor/players.txt");
-    setfile.open("decoration_set.txt");
-    if (!playerfile.is_open()) {
-        cerr << "Error: Unable to open playerfile" << endl;
+    //cout << "file1";
+    fstream in("/Users/admin/Desktop/Home_Decor/Player.txt", ios::in);
+    if (!in) {
+        cout << "file dont found";
         return;
     }
-    string line;
-    Player player;
-    while (getline(playerfile, line))
-    {
-        istringstream iss(line);
-        string token, username, playerpassword;
-        int id;
-        double budget, points;
-        vector<string> tokens;
-        while (getline(iss, token, ',')) {
 
-            tokens.push_back(token);
+    for (int i = 0; !in.eof(); i++) {
 
+        //cout << "file2";
+        string type, name, pass;
+        int id, point;
+        double budget;
+        int s;
+
+        in >> type >> name >> pass >> id >> budget >> point >> s;
+        if (type == "user")
+            break;
+        vector<pair<string, double>>d;
+        for (int i = 0; i < s; i++) {
+            string product;
+            float price;
+            in >> product >> price;
+            d.push_back(make_pair(product, price));
         }
-        istringstream isss0(tokens[0]);
-        isss0 >> username;
-        player.setUserName(username);
-        istringstream isss1(tokens[1]);
-        isss1 >> playerpassword;
-        player.setPass(playerpassword);
-        istringstream isss2(tokens[2]);
-        isss2 >> id;
-        player.set_ID(id);
-        istringstream isss3(tokens[3]);
-        isss3 >> budget;
-        player.set_budget(budget);
-        istringstream isss4(tokens[4]);
-        isss4 >> points;
-        player.setPoints(points);
-        Players.insert(make_pair(username , player));
-    }
-    if (!setfile.is_open()) {
-        cerr << "Error: Unable to open setfile" << endl;
-        return;
-    }
-    while (getline(setfile,line))
-    {
-        istringstream iss(line);
-        string token , username;
-        vector<string> tokens;
-        vector<pair<string, double>> decor;
-        while (getline(iss, token, '[')) {
+        Player p(id, name, pass);
+        p.setPoints(point);
 
-            tokens.push_back(token);
-
-        }
-        istringstream isss0(tokens[0]);
-        isss0 >> username;
-        for (int i = 2 ; i < tokens.size(); i++) {
-            istringstream isss(tokens[i]);
-            string token2;
-            string proname;
-            double price;
-            vector <string>tokens2;
-            while (getline(isss, token2, ',')) {
-                tokens2.push_back(token2);
-            }
-            istringstream isss0(tokens2[0]);
-            isss0 >> proname;
-            istringstream isss1(tokens2[1]);
-            isss1 >> price;
-            decor.push_back(make_pair(proname , price));
-        }
-        player.setdecoration(decor);
+        p.set_budget(budget);
+        p.setdecoration(d);
+        Players.insert(make_pair(name, p));
+        //cout << "fileend";
     }
-    playerfile.close();
-    setfile.close();
+    // cout << Players["AhmedHossam"].getPass();
+    in.close();
+
 }
 void PlayerManager::writeToFile()
 {
-    ofstream playerfile , setfile;
-    playerfile.open("/Users/admin/Desktop/Home_Decor/players.txt");
-    setfile.open("/Users/admin/Desktop/Home_Decor/decoration_set.txt");
-    for(auto it : Players)
-    {
-        playerfile << it.first << ',' << it.second.getPass() << ',' << it.second.get_id() << ',' << it.second.get_budget() << ',' <<it.second.getPoints() << endl;
-        setfile.seekp(0, ios::end); // Set output position indicator to end of file
-        setfile << it.first << "[";
-        vector<pair<string, double>> ::iterator im = it.second.getdecoration().begin();
-        for(auto ir : it.second.getdecoration())
-        {
-            setfile << ir.first << ',' << ir.second;
-            im++;
-            if(im != it.second.getdecoration().end())
-            {
-                setfile << '[';
-            }
-        }
-        setfile << endl;
+    fstream out("/Users/admin/Desktop/Home_Decor/Player.txt", ios::out);
+    if (!out) {
+        cout << "file dont found";
+        return;
     }
-    playerfile.close();
-    setfile.close();
+    for (auto it : Players) {
+        out << "player" << " " << it.second.getUserName() << " " << it.second.getPass() << " "
+            << it.second.get_id() << " " << it.second.get_budget() << " "
+            << it.second.getPoints() << " ";
+        vector<pair<string, double>> d = it.second.getdecoration();
+        out << d.size() << " ";
+        for (int i = 0; i < d.size(); i++) {
+            out << d[i].first << " " << d[i].second << " ";
+        }
+        cout << it.second.getUserName() << d.size() << "\n";
+        out << "\n";
+    }
+    out.close();
+
 }
 PlayerManager::~PlayerManager()
 {
@@ -681,22 +643,6 @@ priority_queue<pair<double, Product>> Admin::get_Products_List()
 {
     return products;
 }
-optional<pair<double, Store>> Admin::iterate_on_Stores(std::string store_name)
-{
-    priority_queue<pair<double, Store>> temp;
-    std::optional<pair<double , Store>> storeOpt; // Optional store
-    while (!stores.empty())
-    {
-        if (stores.top().second.get_Store_Name() == store_name)
-        {
-            storeOpt = stores.top(); // Store found, set it in the optional
-        }
-        temp.push(stores.top());
-        stores.pop();
-    }
-    stores = priority_queue<pair<double, Store>>(temp);
-    return storeOpt; // Return the optional
-}
 bool Admin::Check_Validate_On_Email(const std::string& email)
 {
     //email format should be >> (Username@gmail.com).
@@ -712,10 +658,10 @@ bool Admin::Check_Validate_on_Password(const std::string& password)
 pair<double, Store> Admin::iterate_on_Stores_Data(const string& store_name)
 {
     priority_queue<pair<double, Store>> temp;
-    pair<double , Store> store;
-    while(!stores.empty())
+    pair<double, Store> store;
+    while (!stores.empty())
     {
-        if(stores.top().second.get_Store_Name() == store_name)
+        if (stores.top().second.get_Store_Name() == store_name)
         {
             store.first = stores.top().first;
             store.second = stores.top().second;
@@ -724,16 +670,16 @@ pair<double, Store> Admin::iterate_on_Stores_Data(const string& store_name)
         temp.push(stores.top());
         stores.pop();
     }
-    stores = priority_queue<pair<double, Store>> (temp);
+    stores = priority_queue<pair<double, Store>>(temp);
     return store;
 }
 pair<double, Product> Admin::iterate_On_Store_Products(priority_queue<pair<double, Product>> products_set, std::string proname)
 {
     priority_queue<pair<double, Product>> temp;
-    pair<double , Product> product;
-    while(!products_set.empty())
+    pair<double, Product> product;
+    while (!products_set.empty())
     {
-        if(products_set.top().second.get_Product_Name() == proname)
+        if (products_set.top().second.get_Product_Name() == proname)
         {
             product.first = products_set.top().first;
             product.second = products_set.top().second;
@@ -741,16 +687,16 @@ pair<double, Product> Admin::iterate_On_Store_Products(priority_queue<pair<doubl
         temp.push(products_set.top());
         products_set.pop();
     }
-    products_set = priority_queue<pair<double, Product>> (temp);
+    products_set = priority_queue<pair<double, Product>>(temp);
     return product;
 }
 pair<double, Product> Admin::iterate_On_System_Products(const string& product_name)
 {
     priority_queue<pair<double, Product>> temp;
-    pair<double , Product> product;
-    while(!products.empty())
+    pair<double, Product> product;
+    while (!products.empty())
     {
-        if(products.top().second.get_Product_Name() == product_name)
+        if (products.top().second.get_Product_Name() == product_name)
         {
             product.first = products.top().first;
             product.second = products.top().second;
@@ -759,112 +705,112 @@ pair<double, Product> Admin::iterate_On_System_Products(const string& product_na
         temp.push(products.top());
         products.pop();
     }
-    products = priority_queue<pair<double, Product>> (temp);
+    products = priority_queue<pair<double, Product>>(temp);
     return product;
 }
 void Admin::Add_Store()
 {
     bool f = 0;
     string storename;
-    int Number_Of_Product , counter , count , storeid;
+    int Number_Of_Product, counter, count, storeid;
     priority_queue<pair<double, Product>> product_list;
     priority_queue<pair<double, Store>> sto_temp;
-    while(true)
+    while (true)
     {
         cout << "Enter The Store ID: ";
         cin >> storeid;
         cin.ignore();
-        while(!stores.empty())
+        while (!stores.empty())
         {
-            if(stores.top().second.get_Store_ID() == storeid)
+            if (stores.top().second.get_Store_ID() == storeid)
             {
                 f = 1;
             }
             sto_temp.push(stores.top());
             stores.pop();
         }
-        stores = priority_queue<pair<double, Store>> (sto_temp);
-        if(f == 1)
+        stores = priority_queue<pair<double, Store>>(sto_temp);
+        if (f == 1)
         {
             cout << "This ID Is Already Exist!!!!!" << '\n';
             std::this_thread::sleep_for(std::chrono::seconds(0));
-            Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+            // Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
             cout << "-------------------------------" << '\n';
             f = 0;
         }
         else
         {
             std::this_thread::sleep_for(std::chrono::seconds(0));
-            Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+            // Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
             break;
         }
     }
     cout << "Enter The Name Of Store: ";
-    getline(cin , storename);
-    transform(storename.begin(), storename.end(), storename.begin(), [](unsigned char c){ return std::tolower(c); });
+    getline(cin, storename);
+    transform(storename.begin(), storename.end(), storename.begin(), [](unsigned char c) { return std::tolower(c); });
     cout << "Enter The Number Of Products: ";
     cin >> Number_Of_Product;
     cin.ignore();
     counter = Number_Of_Product;
     count = 1;
-    if(Number_Of_Product != 0)
+    if (Number_Of_Product != 0)
     {
         cout << "Enter The Product List :" << '\n';
     }
-    while(counter--)
+    while (counter--)
     {
-        if(count == 1)
+        if (count == 1)
         {
             cout << "Enter The Product List" << '\n';
         }
-        cout << count <<"-";
-        Add_New_Product(product_list , storename);
+        cout << count << "-";
+        Add_New_Product(product_list, storename);
         count++;
     }
-    Store newstore(storeid , storename , 0 , Number_Of_Product , product_list);
-    stores.push(make_pair(0 , newstore));
+    Store newstore(storeid, storename, 0, Number_Of_Product, product_list);
+    stores.push(make_pair(0, newstore));
 }
-void Admin::Add_New_Product(priority_queue<pair<double , Product>> &Product_List, string storename)
+void Admin::Add_New_Product(priority_queue<pair<double, Product>>& Product_List, string storename)
 {
     string productname;
-    int procounter , proid;
+    int procounter, proid;
     double pri;
     bool f = 0;
     //if Add With Store.
     priority_queue<pair<double, Product>> pro_list;
-    while(true)
+    while (true)
     {
         cout << "Enter The Product ID: ";
         cin >> proid;
         cin.ignore();
-        while(!products.empty())
+        while (!products.empty())
         {
-            if(products.top().second.getProductId() == proid)
+            if (products.top().second.getProductId() == proid)
             {
                 f = 1;
             }
             pro_list.push(products.top());
             products.pop();
         }
-        products = priority_queue<pair<double, Product>> (pro_list);
-        if(f == 1)
+        products = priority_queue<pair<double, Product>>(pro_list);
+        if (f == 1)
         {
             cout << "This ID Is Already Exist!!!!!" << '\n';
             std::this_thread::sleep_for(std::chrono::seconds(0));
-            Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+            //  Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
             cout << "-------------------------------" << '\n';
             f = 0;
         }
         else
         {
             std::this_thread::sleep_for(std::chrono::seconds(0));
-            Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+            //   Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
             break;
         }
     }
     cout << "Enter Product Name : ";
-    getline(cin , productname);
-    transform(productname.begin(), productname.end(), productname.begin(), [](unsigned char c){ return std::tolower(c); });
+    getline(cin, productname);
+    transform(productname.begin(), productname.end(), productname.begin(), [](unsigned char c) { return std::tolower(c); });
     cout << '\n';
     cout << "Enter Product Counter : ";
     cin >> procounter;
@@ -874,31 +820,31 @@ void Admin::Add_New_Product(priority_queue<pair<double , Product>> &Product_List
     cin >> pri;
     cin.ignore();
     cout << '\n';
-    Product newproduct(proid ,productname , storename , procounter , pri , 0.0);
-    pair<double , Store> sto_temp = iterate_on_Stores_Data(storename);
+    Product newproduct(proid, productname, storename, procounter, pri, 0.0);
+    pair<double, Store> sto_temp = iterate_on_Stores_Data(storename);
     int stocount = sto_temp.second.get_Number_Of_Product();
     stocount++;
     sto_temp.second.set_Number_Of_Product(stocount);
     //pushing in list product for store
-    Product_List.push(make_pair(0.0 , newproduct));
+    Product_List.push(make_pair(0.0, newproduct));
     //pushing in list of all products in system.
-    products.push(make_pair(0.0 , newproduct));
+    products.push(make_pair(0.0, newproduct));
 }
-void Admin::Update_Product_Information(priority_queue<pair<double, Product>> &Product_List,string store_name)
+void Admin::Update_Product_Information(priority_queue<pair<double, Product>>& Product_List, string store_name)
 {
     priority_queue<pair<double, Product>> pro_alter;
-    string answer , product_name;;
-    cout <<"Product ID" << "|" << "Product Name" << "|" << "Store Name it belongs to" << "|" << "Product Points" << "|" << "Product Price" << '\n';
+    string answer, product_name;;
+    cout << "Product ID" << "|" << "Product Name" << "|" << "Store Name it belongs to" << "|" << "Product Points" << "|" << "Product Price" << '\n';
     cout << "------------------------------------------------------------------------------------------------------" << '\n';
-    while(!Product_List.empty())
+    while (!Product_List.empty())
     {
         cout << Product_List.top().second.getProductId() << "|" << Product_List.top().second.get_Product_Name() << "|" << Product_List.top().second.getStoreName() << "|" << Product_List.top().first << "|" << Product_List.top().second.get_Price() << '\n';
         pro_alter.push(Product_List.top());
     }
-    Product_List = priority_queue<pair<double, Product>> (pro_alter);
+    Product_List = priority_queue<pair<double, Product>>(pro_alter);
     cout << "Enter Product Name Which You Want to Update its Information" << '\n';
-    getline(cin , product_name);
-    pair<double, Product> pro = iterate_On_Store_Products(Product_List , product_name);
+    getline(cin, product_name);
+    pair<double, Product> pro = iterate_On_Store_Products(Product_List, product_name);
     do
     {
         int ans;
@@ -908,7 +854,7 @@ void Admin::Update_Product_Information(priority_queue<pair<double, Product>> &Pr
             cout << "1- Change Product_Counter\n";
             cout << "2- Change Product_Price\n";
             cin >> ans;
-            if(ans == 1 || ans == 2)
+            if (ans == 1 || ans == 2)
             {
                 break;
             }
@@ -916,30 +862,30 @@ void Admin::Update_Product_Information(priority_queue<pair<double, Product>> &Pr
             {
                 cout << "Invalid Answer!!!" << '\n';
             }
-        }while(true);
+        } while (true);
         cin.ignore();
-        if(ans == 1)
+        if (ans == 1)
         {
             int new_counter;
             cout << "Enter New counter of product : ";
             cin >> new_counter;
             cin.ignore();
-            Product newproduct(pro.second.getProductId() ,pro.second.get_Product_Name(),pro.second.getStoreName(), new_counter,pro.second.get_Price() , pro.second.getPoints());
-            Product_List.push(make_pair(pro.first , newproduct));
-            products.push(make_pair(pro.second.getPoints() , newproduct));
+            Product newproduct(pro.second.getProductId(), pro.second.get_Product_Name(), pro.second.getStoreName(), new_counter, pro.second.get_Price(), pro.second.getPoints());
+            Product_List.push(make_pair(pro.first, newproduct));
+            products.push(make_pair(pro.second.getPoints(), newproduct));
             priority_queue<pair<double, Product>> alter;
-            while(!Product_List.empty())
+            while (!Product_List.empty())
             {
-                if(Product_List.top().second.get_Product_Name() != pro.second.get_Product_Name())
+                if (Product_List.top().second.get_Product_Name() != pro.second.get_Product_Name())
                 {
                     alter.push(Product_List.top());
                     Product_List.pop();
                 }
             }
             Product_List = priority_queue<pair<double, Product>>(alter);
-            while(!products.empty())
+            while (!products.empty())
             {
-                if(products.top().second.get_Product_Name() != pro.second.get_Product_Name())
+                if (products.top().second.get_Product_Name() != pro.second.get_Product_Name())
                 {
                     alter.push(products.top());
                     products.pop();
@@ -951,53 +897,53 @@ void Admin::Update_Product_Information(priority_queue<pair<double, Product>> &Pr
         {
             Change_Price_Of_Product(product_name);
         }
-        while(true)
+        while (true)
         {
             cout << "Enter yes(if you want change another data) / no(if not)" << '\n';
-            getline(cin , answer);
-            transform(answer.begin(), answer.end(), answer.begin(), [](unsigned char c){ return std::tolower(c); });
-            if((answer == "yes") || (answer == "no"))
+            getline(cin, answer);
+            transform(answer.begin(), answer.end(), answer.begin(), [](unsigned char c) { return std::tolower(c); });
+            if ((answer == "yes") || (answer == "no"))
             {
                 break;
             }
             cout << "Invalid Answer!!!" << '\n';
         }
-    }while(answer != "no");
+    } while (answer != "no");
 }
-void Admin::Remove_Product(priority_queue<pair<double, Product>> &Product_List , string store_name)
+void Admin::Remove_Product(priority_queue<pair<double, Product>>& Product_List, string store_name)
 {
     priority_queue<pair<double, Product>> pro_alter;
-    string answer , product_name;;
-    cout <<"Product ID" << "|" << "Product Name" << "|" << "Store Name it belongs to" << "|" << "Product Points" << "|" << "Product Price" << '\n';
+    string answer, product_name;;
+    cout << "Product ID" << "|" << "Product Name" << "|" << "Store Name it belongs to" << "|" << "Product Points" << "|" << "Product Price" << '\n';
     cout << "------------------------------------------------------------------------------------------------------" << '\n';
-    while(!Product_List.empty())
+    while (!Product_List.empty())
     {
-        cout <<Product_List.top().second.getProductId() << "|" << Product_List.top().second.get_Product_Name() << "|" << Product_List.top().second.getStoreName() << "|" << Product_List.top().first << "|" << Product_List.top().second.get_Price() << '\n';
+        cout << Product_List.top().second.getProductId() << "|" << Product_List.top().second.get_Product_Name() << "|" << Product_List.top().second.getStoreName() << "|" << Product_List.top().first << "|" << Product_List.top().second.get_Price() << '\n';
         pro_alter.push(Product_List.top());
     }
-    Product_List = priority_queue<pair<double, Product>> (pro_alter);
+    Product_List = priority_queue<pair<double, Product>>(pro_alter);
     cout << "Enter Product Name Which You Want to Remove it " << '\n';
-    getline(cin , product_name);
-    transform(product_name.begin(), product_name.end(), product_name.begin(), [](unsigned char c){ return std::tolower(c); });
-    pair<double, Product> pro = iterate_On_Store_Products(Product_List , product_name);
-    while(!Product_List.empty())
+    getline(cin, product_name);
+    transform(product_name.begin(), product_name.end(), product_name.begin(), [](unsigned char c) { return std::tolower(c); });
+    pair<double, Product> pro = iterate_On_Store_Products(Product_List, product_name);
+    while (!Product_List.empty())
     {
-        if(Product_List.top().second.get_Product_Name() != pro.second.get_Product_Name())
+        if (Product_List.top().second.get_Product_Name() != pro.second.get_Product_Name())
         {
             pro_alter.push(Product_List.top());
             Product_List.pop();
         }
     }
     Product_List = priority_queue<pair<double, Product>>(pro_alter);
-    while(!products.empty())
+    while (!products.empty())
     {
-        if(products.top().second.get_Product_Name() != pro.second.get_Product_Name())
+        if (products.top().second.get_Product_Name() != pro.second.get_Product_Name())
         {
             pro_alter.push(products.top());
             products.pop();
         }
     }
-    pair<double , Store> sto_temp = iterate_on_Stores_Data(store_name);
+    pair<double, Store> sto_temp = iterate_on_Stores_Data(store_name);
     int stocount = sto_temp.second.get_Number_Of_Product();
     stocount--;
     sto_temp.second.set_Number_Of_Product(stocount);
@@ -1011,15 +957,15 @@ void Admin::update_Store_Information()
         priority_queue<pair<double, Store>> temp;
         int count = 1;
         cout << "Choose Which Store You Want To Update Its Information : " << '\n';
-        while(!stores.empty())
+        while (!stores.empty())
         {
             cout << "Store Number : " << count << "-" << stores.top().second.get_Store_Name();
             temp.push(stores.top());
             stores.pop();
             count++;
         }
-        getline(cin , answer);
-        pair<double , Store> store = iterate_on_Stores_Data(answer);
+        getline(cin, answer);
+        pair<double, Store> store = iterate_on_Stores_Data(answer);
         do
         {
             int ans;
@@ -1031,7 +977,7 @@ void Admin::update_Store_Information()
                 cout << "3- Change Product_List\n";
                 cin >> ans;
                 cin.ignore();
-                if(ans == 1 || ans == 2 || ans == 3)
+                if (ans == 1 || ans == 2 || ans == 3)
                 {
                     break;
                 }
@@ -1039,20 +985,20 @@ void Admin::update_Store_Information()
                 {
                     cout << "Invalid Answer!!!" << '\n';
                 }
-            }while(true);
-            int new_Num_Product , press , newnum;
-            if(ans == 1)
+            } while (true);
+            int new_Num_Product, press, newnum;
+            if (ans == 1)
             {
                 string new_name;
                 cout << "Enter New Name : ";
-                getline(cin , new_name);
-                transform(new_name.begin(), new_name.end(), new_name.begin(), [](unsigned char c){ return std::tolower(c); });
-                Store newstore(store.second.get_Store_ID(),new_name , store.second.get_Store_Rate() , store.second.get_Number_Of_Product() , store.second.get_Product_List());
-                stores.push(make_pair(store.first , newstore));
+                getline(cin, new_name);
+                transform(new_name.begin(), new_name.end(), new_name.begin(), [](unsigned char c) { return std::tolower(c); });
+                Store newstore(store.second.get_Store_ID(), new_name, store.second.get_Store_Rate(), store.second.get_Number_Of_Product(), store.second.get_Product_List());
+                stores.push(make_pair(store.first, newstore));
                 priority_queue<pair<double, Store>> alter;
-                while(!stores.empty())
+                while (!stores.empty())
                 {
-                    if(stores.top().second.get_Store_Name() != store.second.get_Store_Name())
+                    if (stores.top().second.get_Store_Name() != store.second.get_Store_Name())
                     {
                         alter.push(stores.top());
                         stores.pop();
@@ -1060,19 +1006,19 @@ void Admin::update_Store_Information()
                 }
                 stores = priority_queue<pair<double, Store>>(alter);
             }
-            else if(ans == 2)
+            else if (ans == 2)
             {
                 cout << "Press :" << '\n';
                 cout << "1-Add New Product." << '\n';
                 cout << "2-Remove Product." << '\n';
-                while(true)
+                while (true)
                 {
                     cin >> press;
-                    if(press == 1 || press == 2)
+                    if (press == 1 || press == 2)
                     {
                         cout << "Valid Choice ^^" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                        // Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                         cout << "-----------------------------------------------------" << '\n';
                         break;
                     }
@@ -1080,20 +1026,20 @@ void Admin::update_Store_Information()
                     {
                         cout << "Invalid Choice!!! / Please,Enter Operation again: ";
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                        // Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                         cout << "-----------------------------------------------------" << '\n';
                     }
                 }
-                if(press == 1)
+                if (press == 1)
                 {
                     cout << "Enter Number Of Products You Will Add them: ";
                     cin >> new_Num_Product;
                     press = new_Num_Product;
                     cin.ignore();
-                    while(press--)
+                    while (press--)
                     {
-                        priority_queue<pair<double , Product>> pro_temp = priority_queue<pair<double , Product>>(store.second.get_Product_List());
-                        Add_New_Product(pro_temp , store.second.get_Store_Name());
+                        priority_queue<pair<double, Product>> pro_temp = priority_queue<pair<double, Product>>(store.second.get_Product_List());
+                        Add_New_Product(pro_temp, store.second.get_Store_Name());
                     }
                     newnum = store.second.get_Number_Of_Product();
                     newnum += new_Num_Product;
@@ -1107,10 +1053,10 @@ void Admin::update_Store_Information()
                     cin >> new_Num_Product;
                     press = new_Num_Product;
                     cin.ignore();
-                    while(press--)
+                    while (press--)
                     {
-                        priority_queue<pair<double , Product>> pro_temp = priority_queue<pair<double , Product>>(store.second.get_Product_List());
-                        Remove_Product(pro_temp , store.second.get_Store_Name());
+                        priority_queue<pair<double, Product>> pro_temp = priority_queue<pair<double, Product>>(store.second.get_Product_List());
+                        Remove_Product(pro_temp, store.second.get_Store_Name());
                     }
                     newnum = store.second.get_Number_Of_Product();
                     newnum -= new_Num_Product;
@@ -1118,12 +1064,12 @@ void Admin::update_Store_Information()
                     stocount--;
                     store.second.set_Number_Of_Product(stocount);
                 }
-                Store newstore(store.second.get_Store_ID(), store.second.get_Store_Name(), store.second.get_Store_Rate() , newnum , store.second.get_Product_List());
-                stores.push(make_pair(store.first , newstore));
+                Store newstore(store.second.get_Store_ID(), store.second.get_Store_Name(), store.second.get_Store_Rate(), newnum, store.second.get_Product_List());
+                stores.push(make_pair(store.first, newstore));
                 priority_queue<pair<double, Store>> alter;
-                while(!stores.empty())
+                while (!stores.empty())
                 {
-                    if(stores.top().second.get_Store_Name() != store.second.get_Store_Name())
+                    if (stores.top().second.get_Store_Name() != store.second.get_Store_Name())
                     {
                         alter.push(stores.top());
                         stores.pop();
@@ -1142,7 +1088,7 @@ void Admin::update_Store_Information()
                     cout << "3- Remove Product\n";
                     cin >> choice;
                     cin.ignore();
-                    if(choice == 1 || choice == 2 || choice == 3)
+                    if (choice == 1 || choice == 2 || choice == 3)
                     {
                         break;
                     }
@@ -1150,39 +1096,39 @@ void Admin::update_Store_Information()
                     {
                         cout << "Invalid Answer!!!" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                        //  Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                         cout << "-----------------" << '\n';
                     }
-                }while(true);
-                if(choice == 1)
+                } while (true);
+                if (choice == 1)
                 {
                     cout << "Enter Number Of Products You Will Add them: ";
                     cin >> new_Num_Product;
                     press = new_Num_Product;
                     cin.ignore();
-                    while(press--)
+                    while (press--)
                     {
-                        priority_queue<pair<double , Product>> pro_temp = priority_queue<pair<double , Product>>(store.second.get_Product_List());
-                        Add_New_Product(pro_temp , store.second.get_Store_Name());
+                        priority_queue<pair<double, Product>> pro_temp = priority_queue<pair<double, Product>>(store.second.get_Product_List());
+                        Add_New_Product(pro_temp, store.second.get_Store_Name());
                     }
                     newnum = store.second.get_Number_Of_Product();
                     newnum += new_Num_Product;
-                    Store newstore(store.second.get_Store_ID(), store.second.get_Store_Name(), store.second.get_Store_Rate() , newnum , store.second.get_Product_List());
-                    stores.push(make_pair(store.first , newstore));
+                    Store newstore(store.second.get_Store_ID(), store.second.get_Store_Name(), store.second.get_Store_Rate(), newnum, store.second.get_Product_List());
+                    stores.push(make_pair(store.first, newstore));
                 }
-                else if(choice == 2)
+                else if (choice == 2)
                 {
                     cout << "Enter Number Of Products You Will Update them: ";
                     cin >> new_Num_Product;
                     press = new_Num_Product;
                     cin.ignore();
-                    while(press--)
+                    while (press--)
                     {
-                        priority_queue<pair<double , Product>> pro_temp = priority_queue<pair<double , Product>>(store.second.get_Product_List());
-                        Add_New_Product(pro_temp , store.second.get_Store_Name());
+                        priority_queue<pair<double, Product>> pro_temp = priority_queue<pair<double, Product>>(store.second.get_Product_List());
+                        Add_New_Product(pro_temp, store.second.get_Store_Name());
                     }
-                    Store newstore(store.second.get_Store_ID(), store.second.get_Store_Name(), store.second.get_Store_Rate() , store.second.get_Number_Of_Product() , store.second.get_Product_List());
-                    stores.push(make_pair(store.first , newstore));
+                    Store newstore(store.second.get_Store_ID(), store.second.get_Store_Name(), store.second.get_Store_Rate(), store.second.get_Number_Of_Product(), store.second.get_Product_List());
+                    stores.push(make_pair(store.first, newstore));
                 }
                 else
                 {
@@ -1190,20 +1136,20 @@ void Admin::update_Store_Information()
                     cin >> new_Num_Product;
                     press = new_Num_Product;
                     cin.ignore();
-                    while(press--)
+                    while (press--)
                     {
-                        priority_queue<pair<double , Product>> pro_temp = priority_queue<pair<double , Product>>(store.second.get_Product_List());
-                        Remove_Product(pro_temp , store.second.get_Store_Name());
+                        priority_queue<pair<double, Product>> pro_temp = priority_queue<pair<double, Product>>(store.second.get_Product_List());
+                        Remove_Product(pro_temp, store.second.get_Store_Name());
                     }
                     newnum = store.second.get_Number_Of_Product();
                     newnum -= new_Num_Product;
-                    Store newstore(store.second.get_Store_ID(), store.second.get_Store_Name(), store.second.get_Store_Rate() , newnum , store.second.get_Product_List());
-                    stores.push(make_pair(store.first , newstore));
+                    Store newstore(store.second.get_Store_ID(), store.second.get_Store_Name(), store.second.get_Store_Rate(), newnum, store.second.get_Product_List());
+                    stores.push(make_pair(store.first, newstore));
                 }
                 priority_queue<pair<double, Store>> alter;
-                while(!stores.empty())
+                while (!stores.empty())
                 {
-                    if(stores.top().second.get_Store_Name() != store.second.get_Store_Name())
+                    if (stores.top().second.get_Store_Name() != store.second.get_Store_Name())
                     {
                         alter.push(stores.top());
                         stores.pop();
@@ -1211,36 +1157,36 @@ void Admin::update_Store_Information()
                 }
                 stores = priority_queue<pair<double, Store>>(alter);
             }
-            while(true)
+            while (true)
             {
                 cout << "Enter yes(if you want change another data) / no(if not)" << '\n';
-                getline(cin , answer);
-                transform(answer.begin(), answer.end(), answer.begin(), [](unsigned char c){ return std::tolower(c); });
-                if((answer == "yes") || (answer == "no"))
+                getline(cin, answer);
+                transform(answer.begin(), answer.end(), answer.begin(), [](unsigned char c) { return std::tolower(c); });
+                if ((answer == "yes") || (answer == "no"))
                 {
                     break;
                 }
                 cout << "Invalid Answer!!!" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                //Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                 cout << "------------------" << '\n';
             }
-        }while(answer != "no");
-        while(true)
+        } while (answer != "no");
+        while (true)
         {
             cout << "Enter yes(if you want change Information of another Store) / no(if not)" << '\n';
-            getline(cin , answer);
-            transform(answer.begin(), answer.end(), answer.begin(), [](unsigned char c){ return std::tolower(c); });
-            if((answer == "yes") || (answer == "no"))
+            getline(cin, answer);
+            transform(answer.begin(), answer.end(), answer.begin(), [](unsigned char c) { return std::tolower(c); });
+            if ((answer == "yes") || (answer == "no"))
             {
                 break;
             }
             cout << "Invalid Answer!!!" << '\n';
             std::this_thread::sleep_for(std::chrono::seconds(0));
-            Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+            //Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
             cout << "-------------------" << '\n';
         }
-    }while(answer != "no");
+    } while (answer != "no");
 }
 void Admin::Remove_Store()
 {
@@ -1251,7 +1197,7 @@ void Admin::Remove_Store()
     {
         cout << "Enter Store Name Which You Want to Remove it " << '\n';
         int count = 1;
-        while(!stores.empty())
+        while (!stores.empty())
         {
             cout << "Product Number : " << count << "-" << stores.top().second.get_Store_Name() << '\n';
             store_alter.push(stores.top());
@@ -1259,12 +1205,12 @@ void Admin::Remove_Store()
             count++;
         }
         string product_name;
-        getline(cin , product_name);
-        transform(product_name.begin(), product_name.end(), product_name.begin(), [](unsigned char c){ return std::tolower(c); });
+        getline(cin, product_name);
+        transform(product_name.begin(), product_name.end(), product_name.begin(), [](unsigned char c) { return std::tolower(c); });
         stores = priority_queue<pair<double, Store>>(store_alter);
         pair<double, Store> store = iterate_on_Stores_Data(product_name);
         sto = store;
-        if(store.second.get_Store_Rate() < 1.5)
+        if (store.second.get_Store_Rate() < 1.5)
         {
             break;
         }
@@ -1273,10 +1219,10 @@ void Admin::Remove_Store()
             cout << "Sorry You Can't Remove This Store , Choose Another One" << '\n';
             continue;
         }
-    }while(true);
-    while(!stores.empty())
+    } while (true);
+    while (!stores.empty())
     {
-        if(stores.top().second.get_Store_Name() != sto.second.get_Store_Name())
+        if (stores.top().second.get_Store_Name() != sto.second.get_Store_Name())
         {
             store_alter.push(stores.top());
             stores.pop();
@@ -1284,11 +1230,11 @@ void Admin::Remove_Store()
     }
     stores = priority_queue<pair<double, Store>>(store_alter);
 }
-int Admin::Sign_In(const std::string& username, std::string password , int &function)
+int Admin::Sign_In(const std::string& username, std::string password, int& function)
 {
-    if(username == Admin_UserName)
+    if (username == Admin_UserName)
     {
-        if(password == Admin_Password)
+        if (password == Admin_Password)
         {
             function = 3;
             return 1;
@@ -1316,11 +1262,11 @@ void Admin::Display_Top_Rated_Products(const string& store_name)
 {
     int count = 1;
     priority_queue<pair<double, Product>> pro_alter;
-    while(!products.empty())
+    while (!products.empty())
     {
-        if(products.top().second.getStoreName() == store_name)
+        if (products.top().second.getStoreName() == store_name)
         {
-            if(count > 5)
+            if (count > 5)
             {
                 break;
             }
@@ -1346,13 +1292,13 @@ void Admin::Display_Products(const string& store_name)
     priority_queue<pair<double, Product>> pro_alter;
     while (!products.empty())
     {
-        if(count >= 1 && count <= 5)
+        if (count >= 1 && count <= 5)
         {
             goto prolist;
         }
         else
         {
-            if(products.top().second.getStoreName() == store_name)
+            if (products.top().second.getStoreName() == store_name)
             {
                 cout << "Product Number: " << products.top().second.getProductId() << '\n';
                 cout << "Name Of Product : " << products.top().second.get_Product_Name() << '\n';
@@ -1360,7 +1306,7 @@ void Admin::Display_Products(const string& store_name)
                 cout << "Points Of Product : " << products.top().first << '\n';
             }
         }
-        prolist:{};
+        prolist: {};
         count++;
         pro_alter.push(products.top());
         products.pop();
@@ -1382,21 +1328,21 @@ void Admin::Change_Price_Of_Product(const string& product_name)
                 price -= (price * (35 / 100.00));
                 products.top().second.set_Price(price);
             }
-            //discount 15%
+                //discount 15%
             else if (products.top().first >= 1.5 && products.top().first < 2.5)
             {
                 double price = products.top().second.get_Price();
                 price -= (price * (15 / 100.00));
                 products.top().second.set_Price(price);
             }
-            //increase price 15%
+                //increase price 15%
             else if (products.top().first > 2.5 && products.top().first < 3.5)
             {
                 double price = products.top().second.get_Price();
                 price += (price * (15 / 100.00));
                 products.top().second.set_Price(price);
             }
-            //increase price 35%
+                //increase price 35%
             else if (products.top().first >= 3.5 && products.top().first < 5)
             {
                 double price = products.top().second.get_Price();
@@ -1410,12 +1356,12 @@ void Admin::Change_Price_Of_Product(const string& product_name)
     products = priority_queue<pair<double, Product>>(pro_alter);
 }
 //here should reach to product_list from stores.
-priority_queue<pair<double, Product>> Admin::iterate_on_products_Data(const vector<pair<string, double>>&Decoration)
+priority_queue<pair<double, Product>> Admin::iterate_on_products_Data(const vector<pair<string, double>>& Decoration)
 {
     priority_queue<pair<double, Product>> objects;
     priority_queue<pair<double, Product>> pro_alter;
     for (auto it : Decoration) {
-        while(!products.empty())
+        while (!products.empty())
         {
             if (it.first == products.top().second.get_Product_Name())
             {
@@ -1426,18 +1372,18 @@ priority_queue<pair<double, Product>> Admin::iterate_on_products_Data(const vect
     }
     return objects;
 }
-void Admin::calculate_points(Player &player)
+void Admin::calculate_points(Player& player)
 {
     double sum = 0;
-    priority_queue<pair<double , Product>> result = iterate_on_products_Data(player.getdecoration());
-    priority_queue<pair<double , Product>> alter_result;
-    while(!result.empty())
+    priority_queue<pair<double, Product>> result = iterate_on_products_Data(player.getdecoration());
+    priority_queue<pair<double, Product>> alter_result;
+    while (!result.empty())
     {
         sum += result.top().first;
         alter_result.push(result.top());
         result.pop();
     }
-    while(!alter_result.empty())
+    while (!alter_result.empty())
     {
         result.push(alter_result.top());
         alter_result.pop();
@@ -1447,25 +1393,24 @@ void Admin::calculate_points(Player &player)
 double Admin::search_for_product(const string& product_name)
 {
     double price;
-    priority_queue<pair<double , Product>> alter;
-    while(!products.empty())
+    priority_queue<pair<double, Product>> alter;
+    while (!products.empty())
     {
         if (products.top().second.get_Product_Name() == product_name)
         {
             price = products.top().second.get_Price();
-            return price;
         }
         alter.push(products.top());
         products.pop();
     }
-    while(!alter.empty())
+    while (!alter.empty())
     {
         products.push(alter.top());
         alter.pop();
     }
-    return 0;
+    return price;
 }
-vector<string> Admin::split(const std::string &s, char delimiter)
+vector<string> Admin::split(const std::string& s, char delimiter)
 {
     vector<string> tokens;
     stringstream ss(s);
@@ -1475,96 +1420,43 @@ vector<string> Admin::split(const std::string &s, char delimiter)
     }
     return tokens;
 }
+void Admin:: setprolist(priority_queue<pair<double, Product>>lists) {
+    products = lists;
+}
 void Admin::read_stores()
 {
-    ifstream  storefile , productsfile;
-    storefile.open("store.txt");
-    productsfile.open("products.txt");
-    if (!storefile.is_open()) {
-        cerr << "Error: Unable to open storefile" << endl;
+    fstream in("/Users/admin/Desktop/Home_Decor/Store.txt", ios::in);
+    if (!in) {
+        cout << "file does Not found";
         return;
     }
-    string line;
-    Store store;
-    while (getline(storefile, line))
+    //cout << "file\n";
+    string stoname;
+    double stoid, point;
+    int s;
+    while(in >> stoid >> stoname >> point >> s)
     {
-        istringstream iss(line);
-        string token, storename;
-        int stoid, num_of_pro;
-        double points;
-        vector<string> tokens;
-        while (getline(iss, token, ',')) {
-
-            tokens.push_back(token);
-
+        // cout << id << name << point << s<<"\n";
+        if (stoname == "break")
+            break;
+        priority_queue<pair<double, Product>> list,temp;
+        int j = 0;
+        //cout << s << "uppp\n";
+        while (j < s) {
+            string productname, stoname;
+            double proprice, propoints;
+            int num , proid;
+            in >> proid >> productname >> stoname >> proprice >> propoints >> num;
+            Product pro(proid, productname, stoname, num, proprice, propoints);
+            list.push(make_pair(propoints, pro));
+            //cout << Product_List.size() << "up" << endl;
+            products.push(make_pair(propoints, pro));
+            j++;
         }
-        istringstream isss1(tokens[0]);
-        isss1 >> stoid;
-        store.set_Store_ID(stoid);
-        istringstream isss0(tokens[1]);
-        isss0 >> storename;
-        store.set_Store_Name(storename);
-        istringstream isss2(tokens[2]);
-        isss2 >> points;
-        store.set_Store_Rate(points);
-        istringstream isss3(tokens[3]);
-        isss3 >> num_of_pro;
-        store.set_Number_Of_Product(num_of_pro);
-        stores.push(make_pair(points , store));
+        Store sto(stoid , stoname , point , s , list);
+        stores.push(make_pair(point, sto));
     }
-    if (!productsfile.is_open()) {
-        cerr << "Error: Unable to open productsfile" << endl;
-        return;
-    }
-    while (getline(productsfile,line))
-    {
-        istringstream iss(line);
-        string token , storename;
-        vector<string> tokens;
-        priority_queue<pair<double, Product>> pro;
-        Product product;
-        while (getline(iss, token, '[')) {
-
-            tokens.push_back(token);
-
-        }
-        istringstream isss0(tokens[0]);
-        isss0 >> storename;
-        for (int i = 2 ; i < tokens.size(); i++) {
-            istringstream isss(tokens[i]);
-            string token2;
-            string NAMeepro ,NAMeesto;
-            int proiD , counter;
-            double pointsp , price;
-            vector <string>tokens2;
-            while (getline(isss, token2, ',')) {
-                tokens2.push_back(token2);
-            }
-            istringstream isss0(tokens2[0]);
-            isss0 >> proiD;
-            product.setProductId(proiD);
-            istringstream isss1(tokens2[1]);
-            isss1 >> NAMeepro;
-            product.set_Product_Name(NAMeepro);
-            istringstream isss2(tokens2[2]);
-            isss2 >> NAMeesto;
-            product.setStoreName(NAMeesto);
-            istringstream isss3(tokens2[3]);
-            isss3 >> counter;
-            product.setProductCounter(counter);
-            istringstream isss4(tokens2[4]);
-            isss4 >> pointsp;
-            product.setPoints(pointsp);
-            istringstream isss5(tokens2[5]);
-            isss5 >> price;
-            product.set_Price(price);
-            pro.push(make_pair(pointsp , product));
-            products.push(make_pair(pointsp , product));
-        }
-        store.set_Product_List(pro);
-    }
-    storefile.close();
-    productsfile.close();
+    in.close();
 }
 void Admin::write_store()
 {
@@ -1592,8 +1484,7 @@ void Admin::write_store()
                         << currentProduct.getStoreName() << "," << currentProduct.getProductCounter() << ","
                         << currentProduct.getPoints() << "," << currentProduct.get_Price();
             pro_alter.pop();
-            if(!pro_alter.empty())
-            {
+            if (!pro_alter.empty()) {
                 productfile << "[";
             }
         }
@@ -1605,7 +1496,7 @@ void Admin::write_store()
 }
 //old_product >> sell / buy / replace.
 //new_product >> replace only.
-void Admin::Change_budget_of_Player(string old_product,int operation, Player &P , double new_price)
+void Admin::Change_budget_of_Player(string old_product, int operation, Player& P, double new_price)
 {
     double price;
     Store S;
@@ -1626,7 +1517,7 @@ void Admin::Change_budget_of_Player(string old_product,int operation, Player &P 
     {
         //old price.
         price = search_for_product(old_product);
-        if(price == new_price)
+        if (price == new_price)
         {
             P.set_budget(P.get_budget() + 0);
         }
@@ -1670,9 +1561,9 @@ void Admin::display_Stores()
     int count = 1;
     while (!stores.empty())
     {
-        if(count >= 1 && count <= 5)
+        if (count >= 1 && count <= 5)
         {
-            goto list;
+            goto jump;
         }
         else
         {
@@ -1681,7 +1572,7 @@ void Admin::display_Stores()
             cout << "Store ID : " << stores.top().second.get_Store_ID() << '\n';
             cout << "Points Of Product : " << stores.top().first << '\n';
         }
-        list:{};
+        jump: {};
         count++;
         alter.push(stores.top());
         stores.pop();
@@ -1692,57 +1583,69 @@ void Admin::display_Stores()
         alter.pop();
     }
 }
-void Admin::display_top(unordered_map<string , Player> playerlist)
+void Admin::display_top(unordered_map<string, Player> playerlist)
 {
-    multimap<double , Player , greater<double>> player_alter;
-    multimap<double , Player , greater<double>> :: iterator itr = player_alter.begin();
-    for(auto it : playerlist)
+    multimap<double, Player, greater<double>> player_alter;
+    multimap<double, Player, greater<double>> ::iterator itr = player_alter.begin();
+    for (auto it : playerlist)
     {
-        player_alter.insert(make_pair(it.second.getPoints() , it.second));
+        player_alter.insert(make_pair(it.second.getPoints(), it.second));
     }
-    cout << "The Winner Player" <<'\n';
-    cout <<"Winner Name: "<< itr->second.getUserName() << endl;
+    int max = -1;
+    string name;
+    unordered_map<string , Player> l = playerlist;
+    for(auto ig : player_alter )
+    {
+        if(ig.second.getPoints() > max)
+        {
+            max = ig.second.getPoints();
+            name = ig.second.getUserName();
+            vector<pair<string , double>> l = ig.second.getdecoration();
+        }
+    }
+    cout << "The Winner Player" << '\n';
+    cout << "Winner Name: " << name << endl;
     std::this_thread::sleep_for(std::chrono::seconds(0));
-    Sounds("/Users/admin/Desktop/Home_Decor/win.ogg");
-    cout <<"Winner Decoration set: "<< '\n';
-    cout <<"------------------------"<< '\n';
-    for(auto ir : itr->second.getdecoration())
+     Sounds("/Users/admin/Desktop/Home_Decor/win.ogg");
+    cout << "Winner Decoration set: " << '\n';
+    cout << "------------------------" << '\n';
+    for (auto ir : l)
     {
         cout << "Product Name: " << ir.first << '\n';
     }
     cout << "congratulation ^^";
 }
-void Admin::Calculate_Stores_Points(string store_name , double new_points , int operation , double old_points = 0)
+void Admin::Calculate_Stores_Points(string store_name, double new_points, int operation, double old_points = 0)
 {
     double rate = 0.00;
-    pair<double , Store> store = iterate_on_Stores_Data(store_name);
-    if(operation == 1)
+    pair<double, Store> store = iterate_on_Stores_Data(store_name);
+    if (operation == 1)
     {
-        if(store.second.get_Store_Rate() < 5)
+        if (store.second.get_Store_Rate() < 5)
         {
             rate = store.second.get_Store_Rate() + new_points;
-            if(rate > 5)
+            if (rate > 5)
             {
-                rate = fmod(rate , 5);
+                rate = fmod(rate, 5);
             }
         }
     }
-    else if(operation == 2)
+    else if (operation == 2)
     {
-        if(new_points > old_points)
+        if (new_points > old_points)
         {
             rate = store.second.get_Store_Rate() + (new_points - old_points);
-            if(rate > 5)
+            if (rate > 5)
             {
-                rate = fmod(rate , 5);
+                rate = fmod(rate, 5);
             }
         }
         else if (old_points > new_points)
         {
             rate = store.second.get_Store_Rate() - (old_points - new_points);
-            if(rate > 5)
+            if (rate > 5)
             {
-                rate = fmod(rate , 5);
+                rate = fmod(rate, 5);
             }
         }
         else
@@ -1754,12 +1657,12 @@ void Admin::Calculate_Stores_Points(string store_name , double new_points , int 
     {
         rate = store.second.get_Store_Rate() - new_points;
     }
-    Store newstore(store.second.get_Store_ID(),store.second.get_Store_Name(), rate , store.second.get_Number_Of_Product() , store.second.get_Product_List());
-    stores.push(make_pair(store.first , newstore));
+    Store newstore(store.second.get_Store_ID(), store.second.get_Store_Name(), rate, store.second.get_Number_Of_Product(), store.second.get_Product_List());
+    stores.push(make_pair(store.first, newstore));
     priority_queue<pair<double, Store>> alter;
-    while(!stores.empty())
+    while (!stores.empty())
     {
-        if(stores.top().second.get_Store_Name() != store.second.get_Store_Name())
+        if (stores.top().second.get_Store_Name() != store.second.get_Store_Name())
         {
             alter.push(stores.top());
             stores.pop();
@@ -1767,37 +1670,37 @@ void Admin::Calculate_Stores_Points(string store_name , double new_points , int 
     }
     stores = priority_queue<pair<double, Store>>(alter);
 }
-void Admin::Calculate_Product_Points(string product_name , double new_points , int operation , priority_queue<pair<double, Product>> product_list, double old_points = 0)
+void Admin::Calculate_Product_Points(string product_name, double new_points, int operation, priority_queue<pair<double, Product>> product_list, double old_points = 0)
 {
     double rate = 0.00;
-    pair<double , Product> product = iterate_On_Store_Products(product_list , product_name);
-    if(operation == 1)
+    pair<double, Product> product = iterate_On_Store_Products(product_list, product_name);
+    if (operation == 1)
     {
-        if(product.second.getPoints() < 5)
+        if (product.second.getPoints() < 5)
         {
             rate = product.second.getPoints() + new_points;
-            if(rate > 5)
+            if (rate > 5)
             {
-                rate = fmod(rate , 5);
+                rate = fmod(rate, 5);
             }
         }
     }
-    else if(operation == 2)
+    else if (operation == 2)
     {
-        if(new_points > old_points)
+        if (new_points > old_points)
         {
             rate = product.second.getPoints() + (new_points - old_points);
-            if(rate > 5)
+            if (rate > 5)
             {
-                rate = fmod(rate , 5);
+                rate = fmod(rate, 5);
             }
         }
         else if (old_points > new_points)
         {
             rate = product.second.getPoints() - (old_points - new_points);
-            if(rate > 5)
+            if (rate > 5)
             {
-                rate = fmod(rate , 5);
+                rate = fmod(rate, 5);
             }
         }
         else
@@ -1809,12 +1712,12 @@ void Admin::Calculate_Product_Points(string product_name , double new_points , i
     {
         rate = product.second.getPoints() - new_points;
     }
-    Product newproduct(product.second.getProductId(),product.second.get_Product_Name(), product.second.getStoreName() , product.second.getProductCounter(), product.second.get_Price() , rate);
-    products.push(make_pair(product.first , newproduct));
+    Product newproduct(product.second.getProductId(), product.second.get_Product_Name(), product.second.getStoreName(), product.second.getProductCounter(), product.second.get_Price(), rate);
+    products.push(make_pair(product.first, newproduct));
     priority_queue<pair<double, Product>> alter;
-    while(!products.empty())
+    while (!products.empty())
     {
-        if(products.top().second.get_Product_Name() != product.second.get_Product_Name())
+        if (products.top().second.get_Product_Name() != product.second.get_Product_Name())
         {
             alter.push(products.top());
             stores.pop();
@@ -1822,19 +1725,19 @@ void Admin::Calculate_Product_Points(string product_name , double new_points , i
     }
     products = priority_queue<pair<double, Product>>(alter);
 }
-void Admin::change_Product_counter(string proname , string operation , string old)
+void Admin::change_Product_counter(string proname, string operation, string old)
 {
     int count;
-    pair<double , Product> pro = iterate_On_System_Products(proname);
-    if(operation == "buy")
+    pair<double, Product> pro = iterate_On_System_Products(proname);
+    if (operation == "buy")
     {
         count = pro.second.getProductCounter();
         count--;
         pro.second.setProductCounter(count);
     }
-    else if(operation == "replace")
+    else if (operation == "replace")
     {
-        pair<double , Product> oldpro = iterate_On_System_Products(old);
+        pair<double, Product> oldpro = iterate_On_System_Products(old);
         count = pro.second.getProductCounter();
         count--;
         pro.second.setProductCounter(count);
@@ -1851,7 +1754,6 @@ void Admin::change_Product_counter(string proname , string operation , string ol
 }
 int Admin::Sounds(string path)
 {
-    // Load a music file
     sf::Music music;
     if (!music.openFromFile(path)) {
         return -1; // Error loading the file
@@ -1874,7 +1776,7 @@ User::User()
 {
     this->username = " ";
 }
-User::User(int userid ,string name, string password, string email)
+User::User(int userid, string name, string password, string email)
 {
     this->id = userid;
     this->username = name;
@@ -1883,7 +1785,7 @@ User::User(int userid ,string name, string password, string email)
     this->Number_Of_storeRatings = 0;
     this->Number_Of_productRatings = 0;
 }
-User::User(int id , const string &username, const string &password, const string &email, int numberOfProductRatings,int numberOfStoreRatings, const unordered_map<int, double> &productRatings,const unordered_map<int, double> &storeRatings)
+User::User(int id, const string& username, const string& password, const string& email, int numberOfProductRatings, int numberOfStoreRatings, const unordered_map<int, double>& productRatings, const unordered_map<int, double>& storeRatings)
 {
     this->id = id;
     this->username = username;
@@ -1891,10 +1793,10 @@ User::User(int id , const string &username, const string &password, const string
     this->email = email;
     this->Number_Of_productRatings = numberOfProductRatings;
     this->Number_Of_storeRatings = numberOfStoreRatings;
-    this->productRatings = unordered_map<int, double> (productRatings);
-    this->storeRatings = unordered_map<int, double> (storeRatings);
+    this->productRatings = unordered_map<int, double>(productRatings);
+    this->storeRatings = unordered_map<int, double>(storeRatings);
 }
-void User::setUsername(string &newUsername)
+void User::setUsername(string& newUsername)
 {
     username = newUsername;
 }
@@ -1987,7 +1889,7 @@ void User::addStoreRating(const int StoreId, double rating) {
 }
 double User::removeStoreRating(const int StoreId)
 {
-     double rate = storeRatings[StoreId];
+    double rate = storeRatings[StoreId];
     storeRatings.erase(StoreId);
     return rate;
 }
@@ -2001,11 +1903,11 @@ double User::updateStoreRating(const int StoreId, double newRating)
 void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
 {
     priority_queue<pair<double, Store>> alter_store;
-    int ID_of_product , press;
+    int ID_of_product, press;
     string ans;
     int answer;
-    string store_name,product_name;
-    double new_rate , rate;
+    string store_name, product_name;
+    double new_rate, rate;
     Admin admin;
     int count = 1;
     do
@@ -2016,11 +1918,11 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
         do
         {
             cin >> answer;
-            if(answer == 1 || answer == 2)
+            if (answer == 1 || answer == 2)
             {
                 cout << "valid Answer ^^" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                //  admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                 cout << "----------------" << '\n';
                 break;
             }
@@ -2028,11 +1930,11 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
             {
                 cout << "Invalid Answer!!!" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                 cout << "------------------" << '\n';
             }
-        }while(true);
-        if(answer == 2)
+        } while (true);
+        if (answer == 2)
         {
             while (!stores.empty())
             {
@@ -2049,7 +1951,7 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
         }
         cout << "Enter the name of Store you want :" << '\n';
         getline(cin, store_name);
-        transform(store_name.begin(), store_name.end(), store_name.begin(), [](unsigned char c){ return std::tolower(c); });
+        transform(store_name.begin(), store_name.end(), store_name.begin(), [](unsigned char c) { return std::tolower(c); });
         cout << "-----------------------------------" << '\n';
         while (!stores.empty())
         {
@@ -2063,11 +1965,11 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
                     cout << "1- Rate Store\n";
                     cout << "2- Rate Its Product\n";
                     cin >> answer;
-                    if(answer == 1 || answer == 2)
+                    if (answer == 1 || answer == 2)
                     {
                         cout << "Valid Answer ^^" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                        // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                         cout << "------------------" << '\n';
                         break;
                     }
@@ -2075,19 +1977,19 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
                     {
                         cout << "Invalid Answer!!!" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                        // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                         cout << "------------------" << '\n';
 
                     }
-                }while(true);
-                if(answer == 1)
+                } while (true);
+                if (answer == 1)
                 {
                     //rate Store
-                    if(stores.top().second.get_Store_Rate() == 5)
+                    if (stores.top().second.get_Store_Rate() == 5)
                     {
                         cout << "Sorry You Can't Rate this Store!!!" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                        //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                         cout << "----------------------------------" << '\n';
                         goto done;
                     }
@@ -2099,7 +2001,7 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
                         cout << "2- Update Rate to Store\n";
                         cout << "3- Remove Rate to Store\n";
                         cin >> choose;
-                        if(choose == 1 || choose == 2 || choose == 3)
+                        if (choose == 1 || choose == 2 || choose == 3)
                         {
                             break;
                         }
@@ -2107,21 +2009,21 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
                         {
                             cout << "Invalid Answer!!!" << '\n';
                             std::this_thread::sleep_for(std::chrono::seconds(0));
-                            admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                            // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                             cout << "-----------------" << '\n';
                         }
-                    }while(true);
+                    } while (true);
                     int rate;
-                    if(choose == 1)
+                    if (choose == 1)
                     {
-                        while(true)
+                        while (true)
                         {
                             cout << "Enter Rate For Store : ";
                             cin >> rate;
-                            if(rate >= 0 && rate <= 5)
+                            if (rate >= 0 && rate <= 5)
                             {
                                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                                //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                                 cout << "-----------------------------------------------------" << '\n';
                                 break;
                             }
@@ -2129,24 +2031,24 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
                             {
                                 cout << "Invalid Rate!!!" << '\n';
                                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                                //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                                 cout << "----------------" << '\n';
                             }
                         }
-                        addStoreRating(ID , rate);
-                        admin.Calculate_Stores_Points(store_name , rate , 1);
+                        addStoreRating(ID, rate);
+                        admin.Calculate_Stores_Points(store_name, rate, 1);
                         //write function.
                     }
-                    else if(choose == 2)
+                    else if (choose == 2)
                     {
-                        while(true)
+                        while (true)
                         {
                             cout << "Enter New Rate For Store : ";
                             cin >> rate;
-                            if(rate >= 0 && rate <= 5)
+                            if (rate >= 0 && rate <= 5)
                             {
                                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                                //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                                 cout << "-----------------------------------------------------" << '\n';
                                 break;
                             }
@@ -2154,17 +2056,17 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
                             {
                                 cout << "Invalid Rate!!!" << '\n';
                                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                                // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                                 cout << "---------------" << '\n';
                             }
                         }
-                        double points = updateStoreRating(ID , rate);
-                        admin.Calculate_Stores_Points(store_name , rate , 2 , points);
+                        double points = updateStoreRating(ID, rate);
+                        admin.Calculate_Stores_Points(store_name, rate, 2, points);
                     }
                     else
                     {
                         double points = removeStoreRating(ID);
-                        admin.Calculate_Stores_Points(store_name , points , 3);
+                        admin.Calculate_Stores_Points(store_name, points, 3);
                     }
                 }
                 else
@@ -2177,7 +2079,7 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
                         while (!stores.top().second.get_Product_List().empty())
                         {
 
-                            cout <<stores.top().second.get_Product_List().top().second.getProductId()<< " | " << stores.top().second.get_Product_List().top().second.get_Product_Name() << '\n';
+                            cout << stores.top().second.get_Product_List().top().second.getProductId() << " | " << stores.top().second.get_Product_List().top().second.get_Product_Name() << '\n';
                             alter_store.push(stores.top());
                             stores.pop();
                             count++;
@@ -2207,75 +2109,75 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
                             cout << "2- Add Rate To Product:\n";
                             cout << "3- Remove Rate To Product :\n";
                             cin >> press;
-                            if(press == 1 || press == 2 || press == 3)
+                            if (press == 1 || press == 2 || press == 3)
                             {
                                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                                // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                                 break;
                             }
                             else
                             {
                                 cout << "Invalid Answer!!!" << '\n';
                                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                                // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                                 cout << "------------------" << '\n';
                             }
-                        }while(true);
+                        } while (true);
                         if (press == 1)
                         {
-                            while(true)
+                            while (true)
                             {
                                 cout << "Enter New Rate For Product : ";
                                 cin >> new_rate;
-                                if(rate >= 0 && rate <= 5)
+                                if (rate >= 0 && rate <= 5)
                                 {
                                     std::this_thread::sleep_for(std::chrono::seconds(0));
-                                    admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                                    //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                                     break;
                                 }
                                 else
                                 {
                                     cout << "Invalid Rate!!!" << '\n';
                                     std::this_thread::sleep_for(std::chrono::seconds(0));
-                                    admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                                    //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                                     cout << "----------------" << '\n';
                                 }
                             }
-                            pair<double , Store> stor = admin.iterate_on_Stores_Data(store_name);
-                            double points = updateProductRating(ID_of_product , new_rate);
-                            admin.Calculate_Product_Points(product_name , rate , 1 ,stor.second.get_Product_List() ,points);
+                            pair<double, Store> stor = admin.iterate_on_Stores_Data(store_name);
+                            double points = updateProductRating(ID_of_product, new_rate);
+                            admin.Calculate_Product_Points(product_name, rate, 1, stor.second.get_Product_List(), points);
                             admin.Change_Price_Of_Product(product_name);
                         }
-                        else if(press == 2)
+                        else if (press == 2)
                         {
-                            while(true)
+                            while (true)
                             {
                                 cout << "Enter Rate For Product : ";
                                 cin >> rate;
-                                if(rate >= 0 && rate <= 5)
+                                if (rate >= 0 && rate <= 5)
                                 {
                                     std::this_thread::sleep_for(std::chrono::seconds(0));
-                                    admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                                    // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                                     break;
                                 }
                                 else
                                 {
                                     cout << "Invalid Rate!!!" << '\n';
                                     std::this_thread::sleep_for(std::chrono::seconds(0));
-                                    admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                                    //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                                     cout << "----------------" << '\n';
                                 }
                             }
-                            pair<double , Store> stor = admin.iterate_on_Stores_Data(store_name);
-                            addProductRating(ID_of_product , rate);
-                            admin.Calculate_Product_Points(product_name , rate ,2,stor.second.get_Product_List());
+                            pair<double, Store> stor = admin.iterate_on_Stores_Data(store_name);
+                            addProductRating(ID_of_product, rate);
+                            admin.Calculate_Product_Points(product_name, rate, 2, stor.second.get_Product_List());
                             admin.Change_Price_Of_Product(product_name);
                         }
                         else
                         {
                             double points = removeProductRating(ID_of_product);
-                            pair<double , Store> stor = admin.iterate_on_Stores_Data(store_name);
-                            admin.Calculate_Product_Points(product_name , points , 3 , stor.second.get_Product_List());
+                            pair<double, Store> stor = admin.iterate_on_Stores_Data(store_name);
+                            admin.Calculate_Product_Points(product_name, points, 3, stor.second.get_Product_List());
                             admin.Change_Price_Of_Product(product_name);
                         }
                         while (true)
@@ -2286,14 +2188,14 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
                             if (ans == "YES" || ans == "NO")
                             {
                                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                                //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                                 break;
                             }
                             else
                             {
                                 cout << "Invalid Answer !!!" << '\n';
                                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                                // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                                 cout << "--------------------" << '\n';
                             }
                         }
@@ -2306,7 +2208,7 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
                 stores.pop();
             }
         }
-        done:{};
+        done: {};
         stores = priority_queue<pair<double, Store>>(alter_store);
         while (true)
         {
@@ -2316,14 +2218,14 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
             if (ans == "YES" || ans == "NO")
             {
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                 break;
             }
             else
             {
                 cout << "Invalid Answer!!!" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                 cout << " Please !! Enter correct answer :\n";
             }
         }
@@ -2332,12 +2234,12 @@ void User::Search_for_Store(priority_queue<pair<double, Store>> stores)
 void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> stores)
 {
     priority_queue<pair<double, Store>> alter_store;
-    pair<double , Store> searched_store;
-    int ID_of_product , press;
+    pair<double, Store> searched_store;
+    int ID_of_product, press;
     string ans;
-    string store_name,product_name;
+    string store_name, product_name;
     int choose;
-    double new_rate , rate;
+    double new_rate, rate;
     Admin admin;
     int count = 1;
     int ID;
@@ -2350,11 +2252,11 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
         do
         {
             cin >> answer;
-            if(answer == 1 || answer == 2)
+            if (answer == 1 || answer == 2)
             {
                 cout << "valid Answer ^^" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                 cout << "-----------------" << '\n';
                 break;
             }
@@ -2362,11 +2264,11 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
             {
                 cout << "Invalid Answer!!!" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                 cout << "------------------" << '\n';
             }
-        }while(true);
-        if(answer == 2)
+        } while (true);
+        if (answer == 2)
         {
             cout << "Store Number" << " | " << "Store Name" << '\n';
             cout << "--------------------------------------" << '\n';
@@ -2383,17 +2285,17 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
                 alter_store.pop();
             }
         }
-        while(true)
+        while (true)
         {
             cout << "Enter Name Of Store Do You Want: ";
-            getline(cin , store_name);
-            transform(ans.begin(), ans.end(), ans.begin(), [](unsigned char c){ return std::tolower(c); });
+            getline(cin, store_name);
+            transform(ans.begin(), ans.end(), ans.begin(), [](unsigned char c) { return std::tolower(c); });
             searched_store = admin.iterate_on_Stores_Data(store_name);
-            if(searched_store.second.get_Null_Checker() == 1)
+            if (searched_store.second.get_Null_Checker() == 1)
             {
                 cout << "Store Is Found ^^" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                 cout << "------------------" << '\n';
                 break;
             }
@@ -2401,7 +2303,7 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
             {
                 cout << "Store Not Found!!!" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                 cout << "-------------------" << '\n';
             }
         }
@@ -2413,11 +2315,11 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
             cout << "2- Rate Product\n";
             cout << "3- Exit\n";
             cin >> answer;
-            if(answer == 1 || answer == 2 || answer == 3)
+            if (answer == 1 || answer == 2 || answer == 3)
             {
                 cout << "valid Answer ^^" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                 cout << "-----------------" << '\n';
                 break;
             }
@@ -2425,29 +2327,29 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
             {
                 cout << "Invalid Answer!!!" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                 cout << "-------------------" << '\n';
             }
-        }while(true);
-        if(answer == 1)
+        } while (true);
+        if (answer == 1)
         {
-            if(stores.top().second.get_Store_Rate() == 5)
+            if (stores.top().second.get_Store_Rate() == 5)
             {
                 cout << "Sorry You Can't Rate this Store!!!" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                 cout << "-----------------------------------" << '\n';
                 goto enter;
             }
-            while(true)
+            while (true)
             {
                 cout << "Enter Rate For Store : ";
                 cin >> rate;
-                if(rate >= 0 && rate <= 5)
+                if (rate >= 0 && rate <= 5)
                 {
                     cout << "valid Rate!!!" << '\n';
                     std::this_thread::sleep_for(std::chrono::seconds(0));
-                    admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                    // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                     cout << "-------------" << '\n';
                     break;
                 }
@@ -2455,14 +2357,14 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
                 {
                     cout << "Invalid Rate!!!" << '\n';
                     std::this_thread::sleep_for(std::chrono::seconds(0));
-                    admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                    //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                     cout << "----------------" << '\n';
                 }
             }
-            addStoreRating(ID , rate);
-            admin.Calculate_Stores_Points(store_name , rate , 1);
+            addStoreRating(ID, rate);
+            admin.Calculate_Stores_Points(store_name, rate, 1);
         }
-        else if(answer == 2)
+        else if (answer == 2)
         {
             do
             {
@@ -2472,11 +2374,11 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
                 do
                 {
                     cin >> answer;
-                    if(answer == 1 || answer == 2)
+                    if (answer == 1 || answer == 2)
                     {
                         cout << "valid Answer ^^" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                        //  admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                         cout << "----------------" << '\n';
                         break;
                     }
@@ -2484,11 +2386,11 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
                     {
                         cout << "Invalid Answer!!!" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                        // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                         cout << "-----------------" << '\n';
                     }
-                }while(true);
-                if(answer == 2)
+                } while (true);
+                if (answer == 2)
                 {
                     cout << "The Product List Of " << store_name << " Store: " << '\n';
                     cout << "Product Number" << " | " << "Prodcut Name" << '\n';
@@ -2504,7 +2406,7 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
                 }
                 cout << " Enter the name of product you want to Update rating for it  :" << '\n';
                 getline(cin, product_name);
-                transform(product_name.begin(), product_name.end(), product_name.begin(), [](unsigned char c){ return std::tolower(c); });
+                transform(product_name.begin(), product_name.end(), product_name.begin(), [](unsigned char c) { return std::tolower(c); });
                 while (!stores.top().second.get_Product_List().empty())
                 {
                     if (stores.top().second.get_Product_List().top().second.get_Product_Name() == product_name)
@@ -2520,31 +2422,31 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
                 }
                 //return id of product
                 cout << "Do You Want Add Any Rate For This Product?\n";
-                while(true)
+                while (true)
                 {
                     cout << "Answer: ";
-                    getline(cin , ans);
-                    transform(ans.begin(), ans.end(), ans.begin(), [](unsigned char c){ return std::tolower(c); });
-                    if((ans == "yes") || (ans == "no"))
+                    getline(cin, ans);
+                    transform(ans.begin(), ans.end(), ans.begin(), [](unsigned char c) { return std::tolower(c); });
+                    if ((ans == "yes") || (ans == "no"))
                     {
                         cout << "valid Answer ^^" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                        //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                         cout << "-----------------" << '\n';
                         break;
                     }
                     cout << "Invalid Answer!!!" << '\n';
                     std::this_thread::sleep_for(std::chrono::seconds(0));
-                    admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                    //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                     cout << "-----------------" << '\n';
                 }
                 if (ans == "yes")
                 {
-                    while(true)
+                    while (true)
                     {
                         cout << "Enter Rate For Product : ";
                         cin >> rate;
-                        if(rate >= 0 && rate <= 5)
+                        if (rate >= 0 && rate <= 5)
                         {
                             break;
                         }
@@ -2552,13 +2454,13 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
                         {
                             cout << "Invalid Rate!!!" << '\n';
                             std::this_thread::sleep_for(std::chrono::seconds(0));
-                            admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                            // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                             cout << "---------------" << '\n';
                         }
                     }
-                    pair<double , Store> stor = admin.iterate_on_Stores_Data(store_name);
-                    addProductRating(ID_of_product , rate);
-                    admin.Calculate_Product_Points(product_name , rate ,2,stor.second.get_Product_List());
+                    pair<double, Store> stor = admin.iterate_on_Stores_Data(store_name);
+                    addProductRating(ID_of_product, rate);
+                    admin.Calculate_Product_Points(product_name, rate, 2, stor.second.get_Product_List());
                     admin.Change_Price_Of_Product(product_name);
                 }
                 while (true)
@@ -2574,7 +2476,7 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
                     {
                         cout << "Invalid Answer !!!" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                        // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                         cout << "-------------------" << '\n';
                     }
                 }
@@ -2585,7 +2487,7 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
             cout << "Thank You ^^" << '\n';
         }
         stores = priority_queue<pair<double, Store>>(alter_store);
-        enter:{};
+        enter: {};
         while (true)
         {
             cout << " choose ((YES)) if you want to Choose another Store & ((NO)) if not : " << '\n';
@@ -2595,7 +2497,7 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
             {
                 cout << "valid Answer ^^" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                 cout << "-----------------" << '\n';
                 break;
             }
@@ -2603,7 +2505,7 @@ void User::Search_for_Store_When_Sign_Up(priority_queue<pair<double, Store>> sto
             {
                 cout << "Invalid Answer!!!" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                 cout << "------------------" << '\n';
             }
         }
@@ -2620,7 +2522,7 @@ UserManager::UserManager()
 {
     currentUser = " ";
 }
-int UserManager::signUpUser(int id , string& username, string& password, string& email ,unordered_map<string, Player> Players)
+int UserManager::signUpUser(int id, string username, string password, string email, unordered_map<string, Player> Players)
 {
     Admin admin;
     // Check if username already exists
@@ -2630,7 +2532,7 @@ int UserManager::signUpUser(int id , string& username, string& password, string&
         return -1;
     }
     unordered_map<string, User>::iterator it = users.begin();
-    bool f = 0 , p = 0;
+    bool f = 0, p = 0;
     while (it != users.end()) {
         if (it->second.getPassword() == password) {
             f = 1;
@@ -2638,12 +2540,12 @@ int UserManager::signUpUser(int id , string& username, string& password, string&
         }
         else
         {
-            if(it->second.getId() == id)
+            if (it->second.getId() == id)
             {
                 f = 1;
                 break;
             }
-            else if(it->second.getEmail() == email)
+            else if (it->second.getEmail() == email)
             {
                 f = 1;
                 break;
@@ -2651,32 +2553,32 @@ int UserManager::signUpUser(int id , string& username, string& password, string&
         }
         it++;
     }
-    for(auto ir : Players)
+    for (auto ir : Players)
     {
-        if(ir.second.getPass() == password)
+        if (ir.second.getPass() == password)
         {
             p = 1;
             break;
         }
     }
-    if(f || p || password == "Aaaaa$009")
+    if (f || p || password == "Aaaaa$009")
     {
         //if password is found in Players or users.
         //if id is found in users
         //if email is found in users
         return -2;
     }
-    User newUser(id , username , password , email);
+    User newUser(id, username, password, email);
     // Add the new user to the map
-    users.insert({ username , newUser});
+    users.insert({ username , newUser });
     cout << "Player signed up successfully!\n";
     std::this_thread::sleep_for(std::chrono::seconds(0));
-    admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+    // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
     cout << "------------------------------" << '\n';
     //all data is correct.
     return 1;
 }
-int UserManager::signInUser(string& username, string& password , int &function)
+int UserManager::signInUser(string& username, string& password, int& function)
 {
     auto it = users.find(username);
     if (it != users.end()) {
@@ -2698,7 +2600,7 @@ void UserManager::signOutUser()
     Admin admin;
     cout << "User signed out successfully!\n";
     std::this_thread::sleep_for(std::chrono::seconds(0));
-    admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+    // admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
 }
 void UserManager::editUser(unordered_map<string, Player> playerlist)
 {
@@ -2708,7 +2610,7 @@ void UserManager::editUser(unordered_map<string, Player> playerlist)
     do
     {
         auto it = users.find(currentUser);
-        while(true)
+        while (true)
         {
             cout << "Choose what you want to update:\n";
             cout << "1-Change Username\n";
@@ -2716,11 +2618,11 @@ void UserManager::editUser(unordered_map<string, Player> playerlist)
             cout << "3-Change Email\n";
             cin >> choice;
             cin.ignore();
-            if(choice == 1 || choice == 2 || choice == 3)
+            if (choice == 1 || choice == 2 || choice == 3)
             {
                 cout << "Valid Choice ^^" << '\n';
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                 cout << "-----------------------------------------------------" << '\n';
                 break;
             }
@@ -2728,7 +2630,7 @@ void UserManager::editUser(unordered_map<string, Player> playerlist)
             {
                 cout << "Invalid Choice!!! / Please,Enter Choice again: ";
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                 cout << "-----------------------------------------------------" << '\n';
             }
         }
@@ -2739,19 +2641,22 @@ void UserManager::editUser(unordered_map<string, Player> playerlist)
             case 1:
             {
                 string newUsername;
-                while(users.find(newUsername) != users.end()) //check username is exist / or not
+                cout << "Enter new username: ";
+                getline(cin, newUsername);
+                while (users.find(newUsername) != users.end()) //check username is exist / or not
                 {
-                    cout << "Enter new username: ";
-                    getline(cin , newUsername);
+
                     cout << "This username is already exist!!!" << '\n';
+                    cout << "Enter new username: ";
+                    getline(cin, newUsername);
                     std::this_thread::sleep_for(std::chrono::seconds(0));
-                    admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                    // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                     cout << "-----------------------------------------------------" << '\n';
                 }
                 unordered_map<string, User>::iterator it2;
                 it2 = users.find(currentUser);
                 int id = it2->second.getId();
-                User newUser(id , newUsername ,it2->second.getPassword(),it2->second.getEmail());
+                User newUser(id, newUsername, it2->second.getPassword(), it2->second.getEmail());
                 newUser.setId(it2->second.getId());
                 // Add the Player with her/his new data to the map
                 users.insert({ newUsername, newUser });
@@ -2759,41 +2664,41 @@ void UserManager::editUser(unordered_map<string, Player> playerlist)
                 currentUser = newUsername;
                 cout << "Username updated successfully!\n";
                 std::this_thread::sleep_for(std::chrono::seconds(0));
-                admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                 cout << "-----------------------------------------------------" << '\n';
                 break;
             }
             case 2:
             {
-                auto ir = users.begin();
+                auto it = users.begin();
                 bool f = 0;
                 string newPassword;
-                while(true)
+                while (true)
                 {
                     cout << "Enter new password: ";
-                    getline(cin,newPassword);
-                    while (ir != users.end())
+                    getline(cin, newPassword);
+                    while (it != users.end())
                     {
-                        if(ir->second.getPassword() == newPassword)
+                        if (it->second.getPassword() == newPassword)
                         {
                             f = 1;
                             break;
                         }
                         it++;
                     }
-                    for(auto irr : playerlist)
+                    for (auto irr : playerlist)
                     {
-                        if(irr.second.getPass() == newPassword)
+                        if (irr.second.getPass() == newPassword)
                         {
                             f = 1;
                             break;
                         }
                     }
-                    if(f == 1 || newPassword == "Aaaaa$009")
+                    if (f == 1 || newPassword == "Aaaaa$009")
                     {
                         cout << "This password already exist!!!" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                        // admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                         cout << "-----------------------------------------------------" << '\n';
                         f = 0;
                     }
@@ -2801,7 +2706,7 @@ void UserManager::editUser(unordered_map<string, Player> playerlist)
                     {
                         cout << "Valid Password ^^" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                        //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                         cout << "-------------------" << '\n';
                         break;
                     }
@@ -2811,34 +2716,34 @@ void UserManager::editUser(unordered_map<string, Player> playerlist)
             }
             case 3:
             {
-                auto ir = users.begin();
+                auto it = users.begin();
                 bool f = 0;
                 string newemail;
-                while(true)
+                while (true)
                 {
                     cout << "Enter new Email: ";
-                    getline(cin,newemail);
-                    while (ir != users.end())
+                    getline(cin, newemail);
+                    while (it != users.end())
                     {
-                        if(ir->second.getPassword() == newemail)
+                        if (it->second.getPassword() == newemail)
                         {
                             f = 1;
                             break;
                         }
                         it++;
                     }
-                    if(f == 1)
+                    if (f == 1)
                     {
                         cout << "This email already exist!!!" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+                        //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
                         cout << "------------------------------" << '\n';
                     }
                     else
                     {
                         cout << "Valid email ^^" << '\n';
                         std::this_thread::sleep_for(std::chrono::seconds(0));
-                        admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
+                        //admin.Sounds("/Users/admin/Desktop/Home_Decor/rigth.ogg");
                         cout << "-----------------" << '\n';
                         break;
                     }
@@ -2847,21 +2752,21 @@ void UserManager::editUser(unordered_map<string, Player> playerlist)
                 break;
             }
         }
-        while(true)
+        while (true)
         {
             cout << "Enter yes(if you want change another data) / no(if not)" << '\n';
-            getline(cin , ans);
-            transform(ans.begin(), ans.end(), ans.begin(), [](unsigned char c){ return std::tolower(c); });
-            if((ans == "yes") || (ans == "no"))
+            getline(cin, ans);
+            transform(ans.begin(), ans.end(), ans.begin(), [](unsigned char c) { return std::tolower(c); });
+            if ((ans == "yes") || (ans == "no"))
             {
                 break;
             }
             cout << "Invalid Answer!!!" << '\n';
             std::this_thread::sleep_for(std::chrono::seconds(0));
-            admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
+            //admin.Sounds("/Users/admin/Desktop/Home_Decor/error.ogg");
             cout << "------------------" << '\n';
         }
-    }while(ans != "no");
+    } while (ans != "no");
 }
 bool UserManager::isUserSignedIn() const
 {
@@ -2869,164 +2774,92 @@ bool UserManager::isUserSignedIn() const
 }
 void UserManager::user_read()
 {
-    ifstream userfile , product_ratingfile , store_ratingfile;
-    userfile.open("userdata.txt");
-    product_ratingfile.open("product_rating.txt");
-    store_ratingfile.open("store_rating copy.txt");
-    if (!userfile.is_open()) {
-        cerr << "Error: Unable to open playerfile" << endl;
+    //cout << "file1";
+    fstream in("/Users/admin/Desktop/Home_Decor/Player.txt", ios::in);
+    if (!in) {
+        cout << "file dont found";
         return;
     }
-    string line , token, username, userpassword , email;
-    User user;
-    while (getline(userfile, line))
+    string type, name, pass,email;
+    int id;
+    int numpro,numstor;
+    while(in >> type)
     {
-        istringstream iss(line);
-        int id , num_of_pro , num_of_stores;
-        vector<string> tokens;
-        while (getline(iss, token, ',')) {
+//        cout << "file2";
+        if (type == "UsER")
+            break;
+        if (type == "player")
+            continue;
+        else if (type == "user")
+        {
+            in >> name >> pass >> email >> id >> numpro >> numstor;
+            unordered_map<int, double> productRating;
+            unordered_map<int, double> storeRating;
+            //cout << name << pass << email << id << numpro << numstor;
+            int coun = 0;
+            while (coun < numpro) {
+                int  x;
+                double y;
+                in >> x >> y;
 
-            tokens.push_back(token);
-
-        }
-        istringstream isss0(tokens[0]);
-        isss0 >> username;
-        user.setUsername(username);
-        istringstream isss1(tokens[1]);
-        isss1 >> userpassword;
-        user.setPassword(userpassword);
-        istringstream isss2(tokens[2]);
-        isss2 >> email;
-        user.setEmail(email);
-        istringstream isss3(tokens[3]);
-        isss3 >> id;
-        user.setId(id);
-        istringstream isss4(tokens[4]);
-        isss4 >> num_of_pro;
-        user.set_Number_Of_productRatings(num_of_pro);
-        istringstream isss5(tokens[5]);
-        isss4 >> num_of_stores;
-        user.set_Number_Of_storeRatings(num_of_stores);
-        users.insert(make_pair(username , user));
-    }
-    if (!product_ratingfile.is_open()) {
-        cerr << "Error: Unable to open setfile" << endl;
-        return;
-    }
-    while (getline(product_ratingfile,line))
-    {
-        istringstream iss(line);
-        string token ;
-        vector<string> tokens;
-        unordered_map<int , double> pro;
-        while (getline(iss, token, '[')) {
-
-            tokens.push_back(token);
-
-        }
-        istringstream isss0(tokens[0]);
-        isss0 >> username;
-        for (int i = 2 ; i < tokens.size(); i++) {
-            istringstream isss(tokens[i]);
-            string token2;
-            int id;
-            double points;
-            vector <string>tokens2;
-            while (getline(isss, token2, ',')) {
-                tokens2.push_back(token2);
+                productRating.insert(make_pair(x, y));
+                coun++;
             }
-            istringstream isss0(tokens2[0]);
-            isss0 >> id;
-            istringstream isss1(tokens2[1]);
-            isss1 >> points;
-            pro.insert(make_pair(id , points));
-        }
-        user.set_productRatings_list(pro);
-    }
-    if (!store_ratingfile.is_open()) {
-        cerr << "Error: Unable to open setfile" << endl;
-        return;
-    }
-    while (getline(store_ratingfile,line))
-    {
-        istringstream iss(line);
-        string token , username;
-        vector<string> tokens;
-        unordered_map<int , double> sto;
-        while (getline(iss, token, '[')) {
+            coun = 0;
 
-            tokens.push_back(token);
+            while (coun < numstor) {
 
-        }
-        istringstream isss0(tokens[0]);
-        isss0 >> username;
-        for (int i = 2 ; i < tokens.size(); i++) {
-            istringstream isss(tokens[i]);
-            string token2;
-            int id;
-            double points;
-            vector <string>tokens2;
-            while (getline(isss, token2, ',')) {
-                tokens2.push_back(token2);
+                int a;
+                double b;
+                in >> a >> b;
+
+                storeRating.insert(make_pair(a, b));
+                coun++;
             }
-            istringstream isss0(tokens2[0]);
-            isss0 >> id;
-            istringstream isss1(tokens2[1]);
-            isss1 >> points;
-            sto.insert(make_pair(id , points));
+            for (auto it : productRating) {
+                cout << it.first << " " << it.second << "\n";
+            }
+            for (auto it : storeRating) {
+                cout << it.first << " " << it.second << "\n";
+            }
+            User user(id, name, pass, email, numpro, numstor, productRating, storeRating);
+
+            users.insert(make_pair(name, user));
+
         }
-        user.set_storeRatings_list(sto);
+        else
+            continue;
     }
-    userfile.close();
-    product_ratingfile.close();
-    store_ratingfile.close();
+
+
+    in.close();
+
 }
 void UserManager::user_write()
 {
-    ofstream userfile , product_ratingfile , store_ratingfile;
-    userfile.open("userdata.txt");
-    product_ratingfile.open("product_rating.txt");
-    store_ratingfile.open("store_rating copy.txt");
-    if (!userfile.is_open() || !product_ratingfile.is_open() || !store_ratingfile.is_open()) {
-        cerr << "Error: Unable to open files" << endl;
+    fstream out("/Users/admin/Desktop/Home_Decor/Player.txt", ios::app);
+    if (!out) {
+        cout << "file dont found";
         return;
     }
-    priority_queue<pair<double, Store>> sto_temp;
-    // Writing new store data to the store file
-    for(auto it : users)
-    {
-        User user = it.second;
-        userfile << user.getUsername() << ',' << user.getPassword() << ','
-                  << user.getEmail() << ',' << user.getId() << ',' << user.get_Number_Of_productRatings() << ',' << user.get_Number_Of_storeRatings() << endl;
-        // Writing new product data to the product file
-        product_ratingfile.seekp(0, ios::end); // Set output position indicator to end of file
-        product_ratingfile << user.getUsername() << "[";
-        unordered_map<int , double> ::iterator im = it.second.get_productRatings_list().begin();
-        for(auto ir : it.second.get_productRatings_list())
-        {
-            product_ratingfile << ir.first << "," << ir.second << ",";
-            im++;
-            if(im != it.second.get_productRatings_list().end())
-            {
-                product_ratingfile << "[";
-            }
+    for (auto it : users) {
+        out << "user" << " " << it.second.getUsername() << " " << it.second.getPassword() << " "
+            << it.second.getEmail() << " " << it.second.getId() << " "
+            << it.second.get_Number_Of_productRatings() << " "<<it.second.get_Number_Of_storeRatings()<<" ";
+        unordered_map<int, double> productlis = it.second.get_productRatings_list();
+        out << productlis.size() << " ";
+        for (auto it : productlis) {
+            out << it.first << " " << it.second << " ";
         }
-        product_ratingfile << endl;
-        unordered_map<int , double> ::iterator ih = it.second.get_storeRatings_list().begin();
-        for(auto ir : it.second.get_storeRatings_list())
-        {
-            store_ratingfile << ir.first << "," << ir.second << ",";
-            ih++;
-            if(ih != it.second.get_storeRatings_list().end())
-            {
-                store_ratingfile << "[";
-            }
+        unordered_map<int, double> storlis = it.second.get_storeRatings_list();
+        out << storlis.size() << " ";
+        for (auto it : storlis) {
+            out << it.first << " " << it.second << " ";
         }
-        store_ratingfile << endl;
+        out << "\n";
     }
-    userfile.close();
-    product_ratingfile.close();
-    store_ratingfile.close();
+    out.close();
+
 }
 UserManager::~UserManager()
 {
